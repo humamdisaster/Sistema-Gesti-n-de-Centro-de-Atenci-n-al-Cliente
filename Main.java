@@ -1,58 +1,45 @@
-// 1. CLASE PRINCIPAL (1ra colección)
-public class CentroAtencion {
-    private int id;
-    private String nombre;
-    private ArrayList<Cliente> clientes; // 1ra colección
-    private HashMap<Integer, Cliente> clientesMap; // Mapa JCF (SIA1.7)
-    
-    // Constructores
-    public CentroAtencion() {}
-    public CentroAtencion(int id, String nombre) {}
-    
-    // Getters y setters (SIA1.3)
-    public ArrayList<Cliente> getClientes() {}
-    public void setClientes(ArrayList<Cliente> clientes) {}
-    
-    // Métodos sobrecargados (SIA1.6)
-    public void agregarCliente(Cliente cliente) {}
-    public void agregarCliente(String nombre, String email) {}
-}
+import java.util.Scanner;
 
-// 2. CLASE CON COLECCIÓN ANIDADA (2da colección)
-public class Cliente {
-    private int id;
-    private String nombre;
-    private String email;
-    private ArrayList<Caso> casos; // 2da colección anidada (SIA1.5)
-    
-    // Getters y setters
-    public ArrayList<Caso> getCasos() {}
-    public void setCasos(ArrayList<Caso> casos) {}
-}
+public class Main {
+    public static void main(String[] args) {
+        SistemaAtencion sistema = new SistemaAtencion();
+        Scanner sc = new Scanner(System.in);
+        int opcion;
 
-// 3. CLASE PARA LA COLECCIÓN ANIDADA
-public class Caso {
-    private int id;
-    private String descripcion;
-    private String estado;
-    
-    // Getters y setters
-    public String getEstado() {}
-    public void setEstado(String estado) {}
-}
+        do {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Mostrar clientes");
+            System.out.println("2. Mostrar tickets");
+            System.out.println("3. Agregar ticket");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
 
-// 4. GESTOR CON SOBRECARGA (SIA1.6)
-public class GestorClientes {
-    // Métodos sobrecargados
-    public void procesarCliente(Cliente cliente) {}
-    public void procesarCliente(String nombre, String email) {}
-}
+            switch(opcion) {
+                case 1:
+                    sistema.mostrarClientes();
+                    break;
+                case 2:
+                    sistema.mostrarTickets();
+                    break;
+                case 3:
+                    System.out.print("ID Cliente: ");
+                    String idC = sc.nextLine();
+                    System.out.print("ID Ticket: ");
+                    String idT = sc.nextLine();
+                    System.out.print("Descripción: ");
+                    String desc = sc.nextLine();
+                    sistema.agregarTicket(idC, idT, desc);
+                    break;
+                case 0:
+                    System.out.println("Saliendo...");
+                    break;
+                default:
+                    System.out.println("Opción inválida");
+            }
+        } while(opcion != 0);
 
-// 5. EXCEPCIONES PERSONALIZADAS (SIA2.9)
-public class ClienteException extends Exception {
-    public ClienteException(String mensaje) {}
-}
-
-public class CasoException extends Exception {
-    public CasoException(String mensaje) {}
+        sc.close();
+    }
 }
