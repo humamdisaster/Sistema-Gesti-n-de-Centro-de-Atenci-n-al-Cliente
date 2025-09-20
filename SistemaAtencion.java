@@ -45,19 +45,19 @@ public class SistemaAtencion {
 
     //Mostrar clientes
     public void mostrarClientes() {
-        for (Cliente c : clientes.values()) {
-            System.out.println(c.info(true));
+        for (Cliente cliente : clientes.values()) {
+            System.out.println(cliente.info(true));
         }
     }
     
     //Editar ticket
     public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo) {
     	if (ticketsPorCliente.containsKey(idCliente)) {
-    		for (Ticket t : ticketsPorCliente.get(idCliente)) {
-    			if (t.getId().equals(idTicket)) {
-    				t.setDescripcion(nuevaDescripcion);
-    				t.setEstado(nuevoEstado);
-    				t.setTiempoRespuesta(nuevoTiempo);
+    		for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
+    			if (ticket.getId().equals(idTicket)) {
+    				ticket.setDescripcion(nuevaDescripcion);
+    				ticket.setEstado(nuevoEstado);
+    				ticket.setTiempoRespuesta(nuevoTiempo);
     				System.out.println("Ticket editado.");
     				return;
     			}
@@ -89,7 +89,7 @@ public class SistemaAtencion {
     
     //Filtrar tickets por su estado (pendiente o resuelto)
     public void filtrarTicketsPorEstado(String estado) {
-    	System.out.println("\nTicket con estod: " + estado);
+    	System.out.println("\nTicket con estado: " + estado);
     	for (String idCliente : ticketsPorCliente.keySet()) {
     		for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
     			if (ticket.getEstado().equalsIgnoreCase(estado)) {
@@ -102,14 +102,14 @@ public class SistemaAtencion {
     
     //Filtrar tickets por tiempo
     public void filtrarTicketsPorTiempo(int limiteHoras) {
-        System.out.println("\nTickets con tiempo de respuesta mayor a " + limiteHoras + "h");
+        System.out.println("\nTickets con tiempo de respuesta " + limiteHoras + "h");
 
         for (String idCliente : ticketsPorCliente.keySet()) {
             List<Ticket> ticketsCliente = ticketsPorCliente.get(idCliente);
             Cliente clienteActual = clientes.get(idCliente);
 
             for (Ticket ticket : ticketsCliente) {
-                if (ticket.getTiempoRespuesta() > limiteHoras) {
+                if (ticket.getTiempoRespuesta() == limiteHoras) {
                     System.out.println(clienteActual.getNombre() + " -> " + ticket.resumen(true));
                 }
             }

@@ -40,7 +40,7 @@ public class Main {
                     break;
                     
                 case 4:
-                	System.out.print("ID Cliente");
+                	System.out.print("ID Cliente: ");
                 	String idClienteEditar = sc.nextLine();
                 	System.out.print("ID Ticket: ");
                 	String idTicketEditar = sc.nextLine();
@@ -69,7 +69,7 @@ public class Main {
                 	break;
                 	
                 case 7:
-                	System.out.print("Ingrese límite de horas: ");
+                	System.out.print("Ingrese horas a filtrar: ");
                 	int limiteHoras = sc.nextInt();
                 	sc.nextLine();
                 	sistema.filtrarTicketsPorTiempo(limiteHoras);
