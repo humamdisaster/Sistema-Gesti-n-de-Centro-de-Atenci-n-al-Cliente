@@ -56,13 +56,13 @@ public class SistemaAtencion {
     				t.setDescripcion(nuevaDescripcion);
     				t.setEstado(nuevoEstado);
     				t.setTiempoRespuesta(nuevoTiempo);
-    				System.out.println("Ticket editado.")
+    				System.out.println("Ticket editado.");
     				return;
     			}
     		}
     		System.out.println("Ticket no encontrado.");
     	} else {
-    		System.out.println("Cliente no encontrado.")
+    		System.out.println("Cliente no encontrado.");
     	}
     }
     
