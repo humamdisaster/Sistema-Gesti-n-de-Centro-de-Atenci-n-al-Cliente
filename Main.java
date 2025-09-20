@@ -11,6 +11,9 @@ public class Main {
             System.out.println("1. Mostrar clientes");
             System.out.println("2. Mostrar tickets");
             System.out.println("3. Agregar ticket");
+            System.out.println("4. Editar ticket");
+            System.out.println("5. Eliminar ticket");
+            System.out.println("6. Filtrar tickets por tiempo de respuesta");
             System.out.println("0. Salir");
             System.out.print("Seleccione opción: ");
             opcion = sc.nextInt();
@@ -20,21 +23,55 @@ public class Main {
                 case 1:
                     sistema.mostrarClientes();
                     break;
+                    
                 case 2:
                     sistema.mostrarTickets();
                     break;
+                    
                 case 3:
                     System.out.print("ID Cliente: ");
-                    String idC = sc.nextLine();
+                    String idClienteNuevo = sc.nextLine();
                     System.out.print("ID Ticket: ");
-                    String idT = sc.nextLine();
+                    String idTicketNuevo = sc.nextLine();
                     System.out.print("Descripción: ");
-                    String desc = sc.nextLine();
-                    sistema.agregarTicket(idC, idT, desc);
+                    String descripcionNueva = sc.nextLine();
+                    sistema.agregarTicket(idClienteNuevo, idTicketNuevo, descripcionNueva);
                     break;
+                    
+                case 4:
+                	System.out.print("ID Cliente");
+                	String idClienteEditar = sc.nextLine();
+                	System.out.print("ID Ticket: ");
+                	String idTicketEditar = sc.nextLine();
+                	System.out.print("Nueva descripción: ");
+                    String descripcionEditada = sc.nextLine();
+                    System.out.print("Nuevo estado: ");
+                    String estadoEditado = sc.nextLine();
+                    System.out.print("Nuevo tiempo de respuesta (h): ");
+                    int tiempoEditado = sc.nextInt();
+                    sc.nextLine();
+                    sistema.editarTicket(idClienteEditar, idTicketEditar, descripcionEditada, estadoEditado, tiempoEditado);
+                    break;
+                    
+                case 5:
+                	System.out.print("ID Cliente: ");
+                	String idClienteEliminar = sc.nextLine();
+                	System.out.print("ID Ticket: ");
+                	String idTicketEliminar = sc.nextLine();
+                	sistema.eliminarTicket(idClienteEliminar, idTicketEliminar);
+                	break;
+                
+                case 6:
+                	System.out.print("Ingrese límite de horas: ");
+                	int limiteHoras = sc.nextInt();
+                	sc.nextLine();
+                	sistema.filtrarTicketsPorTiempo(limiteHoras);
+                	break;
+                	
                 case 0:
                     System.out.println("Saliendo...");
                     break;
+                    
                 default:
                     System.out.println("Opción inválida");
             }
