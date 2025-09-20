@@ -49,6 +49,8 @@ public class SistemaAtencion {
             System.out.println(c.info(true));
         }
     }
+    
+    //Editar ticket
     public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo) {
     	if (ticketsPorCliente.containsKey(idCliente)) {
     		for (Ticket t : ticketsPorCliente.get(idCliente)) {
@@ -66,6 +68,7 @@ public class SistemaAtencion {
     	}
     }
     
+    //Eliminar ticket
     public void eliminarTicket(String idCliente, String idTicket) {
     	if (ticketsPorCliente.containsKey(idCliente)) {
     		List<Ticket> lista = ticketsPorCliente.get(idCliente);
@@ -82,5 +85,21 @@ public class SistemaAtencion {
     	else {
     		System.out.println("Cliente no encontrado.");
     	}
+    }
+    
+    //Filtrar tickets por tiempo
+    public void filtrarTicketsPorTiempo(int limiteHoras) {
+        System.out.println("\nTickets con tiempo de respuesta mayor a " + limiteHoras + "h");
+
+        for (String idCliente : ticketsPorCliente.keySet()) {
+            List<Ticket> ticketsCliente = ticketsPorCliente.get(idCliente);
+            Cliente clienteActual = clientes.get(idCliente);
+
+            for (Ticket ticket : ticketsCliente) {
+                if (ticket.getTiempoRespuesta() > limiteHoras) {
+                    System.out.println(clienteActual.getNombre() + " -> " + ticket.resumen(true));
+                }
+            }
+        }
     }
 }
