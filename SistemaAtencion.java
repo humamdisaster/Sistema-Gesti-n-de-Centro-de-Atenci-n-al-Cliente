@@ -49,5 +49,38 @@ public class SistemaAtencion {
             System.out.println(c.info(true));
         }
     }
+    public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo) {
+    	if (ticketsPorCliente.containsKey(idCliente)) {
+    		for (Ticket t : ticketsPorCliente.get(idCliente)) {
+    			if (t.getId().equals(idTicket)) {
+    				t.setDescripcion(nuevaDescripcion);
+    				t.setEstado(nuevoEstado);
+    				t.setTiempoRespuesta(nuevoTiempo);
+    				System.out.println("Ticket editado.")
+    				return;
+    			}
+    		}
+    		System.out.println("Ticket no encontrado.");
+    	} else {
+    		System.out.println("Cliente no encontrado.")
+    	}
+    }
+    
+    public void eliminarTicket(String idCliente, String idTicket) {
+    	if (ticketsPorCliente.containsKey(idCliente)) {
+    		List<Ticket> lista = ticketsPorCliente.get(idCliente);
+    		
+    		for (int i = 0; i < lista.size(); i++) {
+    			if (lista.get(i).getId().equals(idTicket)) {
+    				lista.remove(i);
+    				System.out.println("Ticket eliminado.");
+    				return;
+    			}
+    		}
+    		System.out.println("Ticket no encontrado.");
+    	}
+    	else {
+    		System.out.println("Cliente no encontrado.");
+    	}
+    }
 }
-
