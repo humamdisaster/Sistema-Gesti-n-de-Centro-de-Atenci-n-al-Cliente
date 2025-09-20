@@ -13,7 +13,8 @@ public class Main {
             System.out.println("3. Agregar ticket");
             System.out.println("4. Editar ticket");
             System.out.println("5. Eliminar ticket");
-            System.out.println("6. Filtrar tickets por tiempo de respuesta");
+            System.out.println("6. Filtrar tickets por estado");
+            System.out.println("7. Filtrar tickets por tiempo de respuesta");
             System.out.println("0. Salir");
             System.out.print("Seleccione opción: ");
             opcion = sc.nextInt();
@@ -62,6 +63,12 @@ public class Main {
                 	break;
                 
                 case 6:
+                	System.out.print("Ingrese estado a filtrar (Pendiente, Resuelto): ");
+                	String estadoFiltrado = sc.nextLine();
+                	sistema.filtrarTicketsPorEstado(estadoFiltrado);
+                	break;
+                	
+                case 7:
                 	System.out.print("Ingrese límite de horas: ");
                 	int limiteHoras = sc.nextInt();
                 	sc.nextLine();

@@ -87,6 +87,19 @@ public class SistemaAtencion {
     	}
     }
     
+    //Filtrar tickets por su estado (pendiente o resuelto)
+    public void filtrarTicketsPorEstado(String estado) {
+    	System.out.println("\nTicket con estod: " + estado);
+    	for (String idCliente : ticketsPorCliente.keySet()) {
+    		for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
+    			if (ticket.getEstado().equalsIgnoreCase(estado)) {
+    				Cliente clienteActual = clientes.get(idCliente);
+    				System.out.println(clienteActual.getNombre() + " ->" + ticket.resumen(true));
+    			}
+    		}
+    	}
+    }
+    
     //Filtrar tickets por tiempo
     public void filtrarTicketsPorTiempo(int limiteHoras) {
         System.out.println("\nTickets con tiempo de respuesta mayor a " + limiteHoras + "h");
