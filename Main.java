@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import interfaz.*;
 
 /**
  * Main.java
@@ -12,6 +13,11 @@ public class Main {
      * Presenta un menú interactivo al usuario para gestionar clientes y tickets.
      */
     public static void main(String[] args) {
+    	
+    	// Inicializacion de pantalla (Prueba)
+    	Menu menu = new Menu();
+    	menu.setVisible(true);
+    	
         // Instancia del sistema que maneja los clientes y tickets
         SistemaAtencion sistema = new SistemaAtencion();
         Scanner sc = new Scanner(System.in);
