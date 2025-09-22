@@ -1,28 +1,40 @@
 import java.util.*;
 
+/**
+ * Clase que gestiona el sistema de atención de clientes y sus tickets.
+ * Permite registrar, mostrar, editar, eliminar y filtrar tickets.
+ */
 public class SistemaAtencion {
-    //Mapa de clientes
+    /** Mapa de clientes registrados, con su ID como clave. */
     private Map<String, Cliente> clientes = new HashMap<>();
     
-    //Cada cliente tiene lista de tickets
+    /** Mapa que relaciona cada cliente con su lista de tickets. */
     private Map<String, List<Ticket>> ticketsPorCliente = new HashMap<>();
 
+    /**
+     * Constructor que inicializa el sistema con algunos clientes y tickets de ejemplo.
+     */
     public SistemaAtencion() {
-        //Datos iniciales
-        Cliente c1 = new Cliente("C01", "Ana Pérez", "ana@mail.com");
-        Cliente c2 = new Cliente("C02", "Luis Gómez", "luis@mail.com");
+        Cliente cliente1 = new Cliente("C01", "Ana Pérez", "ana@mail.com");
+        Cliente cliente2 = new Cliente("C02", "Luis Gómez", "luis@mail.com");
 
-        clientes.put(c1.getId(), c1);
-        clientes.put(c2.getId(), c2);
+        clientes.put(cliente1.getId(), cliente1);
+        clientes.put(cliente2.getId(), cliente2);
 
-        ticketsPorCliente.put(c1.getId(), new ArrayList<>());
-        ticketsPorCliente.put(c2.getId(), new ArrayList<>());
+        ticketsPorCliente.put(cliente1.getId(), new ArrayList<>());
+        ticketsPorCliente.put(cliente2.getId(), new ArrayList<>());
 
-        ticketsPorCliente.get(c1.getId()).add(new Ticket("T01", "Problema con facturación"));
-        ticketsPorCliente.get(c2.getId()).add(new Ticket("T02", "No puedo iniciar sesión"));
+        ticketsPorCliente.get(cliente1.getId()).add(new Ticket("T01", "Problema con facturación"));
+        ticketsPorCliente.get(cliente2.getId()).add(new Ticket("T02", "No puedo iniciar sesión"));
     }
 
-    //Inserción manual de un ticket
+    /**
+     * Agrega un nuevo ticket al cliente indicado.
+     * 
+     * @param idCliente   ID del cliente dueño del ticket
+     * @param idTicket    ID único del ticket
+     * @param descripcion Descripción del problema
+     */
     public void agregarTicket(String idCliente, String idTicket, String descripcion) {
         if (clientes.containsKey(idCliente)) {
             ticketsPorCliente.get(idCliente).add(new Ticket(idTicket, descripcion));
@@ -32,75 +44,99 @@ public class SistemaAtencion {
         }
     }
 
-    //Mostrar listado de tickets de todos los clientes
+    /**
+     * Muestra todos los tickets de todos los clientes.
+     */
     public void mostrarTickets() {
         for (String idCliente : ticketsPorCliente.keySet()) {
-            Cliente c = clientes.get(idCliente);
-            System.out.println("\nTickets de " + c.info());
-            for (Ticket t : ticketsPorCliente.get(idCliente)) {
-                System.out.println(" - " + t.resumen(true));
+            Cliente clienteActual = clientes.get(idCliente);
+            System.out.println("\nTickets de " + clienteActual.info());
+            for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
+                System.out.println(" - " + ticket.resumen(true));
             }
         }
     }
 
-    //Mostrar clientes
+    /**
+     * Muestra todos los clientes registrados en el sistema.
+     */
     public void mostrarClientes() {
         for (Cliente cliente : clientes.values()) {
             System.out.println(cliente.info(true));
         }
     }
     
-    //Editar ticket
+    /**
+     * Edita un ticket existente de un cliente.
+     * 
+     * @param idCliente         ID del cliente dueño del ticket
+     * @param idTicket          ID del ticket a editar
+     * @param nuevaDescripcion  Nueva descripción del problema
+     * @param nuevoEstado       Nuevo estado (ej: Pendiente, Resuelto)
+     * @param nuevoTiempo       Nuevo tiempo de respuesta en horas
+     */
     public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo) {
-    	if (ticketsPorCliente.containsKey(idCliente)) {
-    		for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
-    			if (ticket.getId().equals(idTicket)) {
-    				ticket.setDescripcion(nuevaDescripcion);
-    				ticket.setEstado(nuevoEstado);
-    				ticket.setTiempoRespuesta(nuevoTiempo);
-    				System.out.println("Ticket editado.");
-    				return;
-    			}
-    		}
-    		System.out.println("Ticket no encontrado.");
-    	} else {
-    		System.out.println("Cliente no encontrado.");
-    	}
+        if (ticketsPorCliente.containsKey(idCliente)) {
+            for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
+                if (ticket.getId().equals(idTicket)) {
+                    ticket.setDescripcion(nuevaDescripcion);
+                    ticket.setEstado(nuevoEstado);
+                    ticket.setTiempoRespuesta(nuevoTiempo);
+                    System.out.println("Ticket editado.");
+                    return;
+                }
+            }
+            System.out.println("Ticket no encontrado.");
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
     
-    //Eliminar ticket
+    /**
+     * Elimina un ticket de un cliente.
+     * 
+     * @param idCliente ID del cliente dueño del ticket
+     * @param idTicket  ID del ticket a eliminar
+     */
     public void eliminarTicket(String idCliente, String idTicket) {
-    	if (ticketsPorCliente.containsKey(idCliente)) {
-    		List<Ticket> lista = ticketsPorCliente.get(idCliente);
-    		
-    		for (int i = 0; i < lista.size(); i++) {
-    			if (lista.get(i).getId().equals(idTicket)) {
-    				lista.remove(i);
-    				System.out.println("Ticket eliminado.");
-    				return;
-    			}
-    		}
-    		System.out.println("Ticket no encontrado.");
-    	}
-    	else {
-    		System.out.println("Cliente no encontrado.");
-    	}
+        if (ticketsPorCliente.containsKey(idCliente)) {
+            List<Ticket> listaTickets = ticketsPorCliente.get(idCliente);
+            
+            for (int i = 0; i < listaTickets.size(); i++) {
+                if (listaTickets.get(i).getId().equals(idTicket)) {
+                    listaTickets.remove(i);
+                    System.out.println("Ticket eliminado.");
+                    return;
+                }
+            }
+            System.out.println("Ticket no encontrado.");
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
     
-    //Filtrar tickets por su estado (pendiente o resuelto)
+    /**
+     * Filtra y muestra los tickets que tienen el estado indicado.
+     * 
+     * @param estado Estado por el que se desea filtrar (ej: Pendiente, Resuelto)
+     */
     public void filtrarTicketsPorEstado(String estado) {
-    	System.out.println("\nTicket con estado: " + estado);
-    	for (String idCliente : ticketsPorCliente.keySet()) {
-    		for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
-    			if (ticket.getEstado().equalsIgnoreCase(estado)) {
-    				Cliente clienteActual = clientes.get(idCliente);
-    				System.out.println(clienteActual.getNombre() + " ->" + ticket.resumen(true));
-    			}
-    		}
-    	}
+        System.out.println("\nTickets con estado: " + estado);
+        for (String idCliente : ticketsPorCliente.keySet()) {
+            for (Ticket ticket : ticketsPorCliente.get(idCliente)) {
+                if (ticket.getEstado().equalsIgnoreCase(estado)) {
+                    Cliente clienteActual = clientes.get(idCliente);
+                    System.out.println(clienteActual.getNombre() + " -> " + ticket.resumen(true));
+                }
+            }
+        }
     }
     
-    //Filtrar tickets por tiempo
+    /**
+     * Filtra y muestra los tickets cuyo tiempo de respuesta coincide con el límite indicado.
+     * 
+     * @param limiteHoras Tiempo de respuesta en horas
+     */
     public void filtrarTicketsPorTiempo(int limiteHoras) {
         System.out.println("\nTickets con tiempo de respuesta " + limiteHoras + "h");
 

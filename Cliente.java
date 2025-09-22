@@ -1,34 +1,36 @@
-
-public class Cliente {
-	private String id;
-	private String nombre;
-	private String email;
-	
-	//constructor
+/**
+* Cliente.java
+* Subclase de Persona que representa un cliente del sistema.
+*/
+public class Cliente extends Persona {
+	/**
+	* Crea un nuevo cliente.
+	* @param id identificador del cliente
+	* @param nombre nombre completo
+	* @param email correo electrónico
+	*/
 	public Cliente(String id, String nombre, String email) {
-		this.id = id;
-		this.nombre = nombre;
-		this.email = email;
+		super(id, nombre, email);
 	}
 	
-	//getters y setters
-	public String getId() {return id;}
-	public void setId(String id) {this.id = id;}
-	
-	public String getNombre() {return nombre;}
-	public void setNombre(String nombre) {this.nombre = nombre;}
-	
-	public String getEmail() {return email;}
-	public void setEmail(String email) {this.email = email;}
-	
-	//sobrecarga
+	/**
+	* Sobreescritura de info() para mostrar detalles propios de Cliente.
+	* @return cadena descriptiva del cliente
+	*/
+	@Override
 	public String info() {
-		return nombre + " (" + id + ")";
+		return "Cliente: " + nombre + " [ID: " + id + ", Email: " + email + "]";
 	}
 	
+	/**
+     * Muestra información del cliente, con opción detallada.
+     * @param detallado si es true incluye todos los campos
+     * @return cadena con información del cliente
+     */
 	public String info(boolean detallado) {
-		if (detallado)
+		if (detallado) {
 			return "ID: " + id + " Nombre: " + nombre + " Email: " + email;
+		}
 		return info();
 	}
 }
