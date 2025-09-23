@@ -1,0 +1,25 @@
+[1mdiff --cc Main.java[m
+[1mindex 148730d,a6bc68b..0000000[m
+[1m--- a/Main.java[m
+[1m+++ b/Main.java[m
+[36m@@@ -9,10 -10,15 +10,19 @@@[m [mpublic class Main [m
+  [m
+      /**[m
+       * Método principal que arranca el programa.[m
+[31m -     * Presenta un menú interactivo al usuario para gestionar clientes y tickets.[m
+[32m +     * Menú interactivo para gestionar clientes y tickets.[m
+       */[m
+      public static void main(String[] args) {[m
+[32m++<<<<<<< HEAD[m
+[32m +        // Instancia del sistema que maneja clientes y tickets[m
+[32m++=======[m
+[32m+     	[m
+[32m+     	// Inicializacion de pantalla (Prueba)[m
+[32m+     	Menu menu = new Menu();[m
+[32m+     	menu.setVisible(true);[m
+[32m+     	[m
+[32m+         // Instancia del sistema que maneja los clientes y tickets[m
+[32m++>>>>>>> 650a75178e2e5ccc9eb06f4d866f5b313d2bf25e[m
+          SistemaAtencion sistema = new SistemaAtencion();[m
+          Scanner sc = new Scanner(System.in);[m
+          int opcion;[m

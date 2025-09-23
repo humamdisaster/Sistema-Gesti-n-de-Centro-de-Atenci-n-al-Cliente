@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import interfaz.*;
 
 /**
  * Main.java
  * Punto de entrada del sistema de atención de tickets.
- * Contiene el menú principal e interacción con el usuario mediante consola.
+ * Contiene el menú principal y la interacción con el usuario mediante consola.
  */
 public class Main {
 
@@ -12,13 +13,17 @@ public class Main {
      * Menú interactivo para gestionar clientes y tickets.
      */
     public static void main(String[] args) {
-        // Instancia del sistema que maneja clientes y tickets
+        // Inicialización de la pantalla gráfica (Prueba)
+        Menu menu = new Menu();
+        menu.setVisible(true);
+
+        // Instancia del sistema que maneja los clientes y tickets
         SistemaAtencion sistema = new SistemaAtencion();
         Scanner sc = new Scanner(System.in);
         int opcion;
 
         do {
-            // Mostrar menú principal
+            // Mostrar menú principal por consola
             System.out.println("\n--- MENU ---");
             System.out.println("1. Mostrar clientes");
             System.out.println("2. Mostrar tickets");
@@ -69,8 +74,7 @@ public class Main {
                     System.out.print("Nuevo tiempo de respuesta (h): ");
                     int tiempoEditado = sc.nextInt();
                     sc.nextLine();
-                    sistema.editarTicket(idClienteEditar, idTicketEditar,
-                                         descripcionEditada, estadoEditado, tiempoEditado);
+                    sistema.editarTicket(idClienteEditar, idTicketEditar, descripcionEditada, estadoEditado, tiempoEditado);
                     break;
 
                 case 5:
