@@ -3,22 +3,22 @@ import java.util.Scanner;
 /**
  * Main.java
  * Punto de entrada del sistema de atención de tickets.
- * Contiene el menú principal y la interacción con el usuario mediante consola.
+ * Contiene el menú principal e interacción con el usuario mediante consola.
  */
 public class Main {
 
     /**
      * Método principal que arranca el programa.
-     * Presenta un menú interactivo al usuario para gestionar clientes y tickets.
+     * Menú interactivo para gestionar clientes y tickets.
      */
     public static void main(String[] args) {
-        // Instancia del sistema que maneja los clientes y tickets
+        // Instancia del sistema que maneja clientes y tickets
         SistemaAtencion sistema = new SistemaAtencion();
         Scanner sc = new Scanner(System.in);
         int opcion;
 
         do {
-            // Mostrar menú
+            // Mostrar menú principal
             System.out.println("\n--- MENU ---");
             System.out.println("1. Mostrar clientes");
             System.out.println("2. Mostrar tickets");
@@ -30,23 +30,23 @@ public class Main {
             System.out.println("0. Salir");
             System.out.print("Seleccione opción: ");
 
-            // Leer opción
+            // Leer opción seleccionada
             opcion = sc.nextInt();
             sc.nextLine(); // limpiar buffer
 
-            switch(opcion) {
+            switch (opcion) {
                 case 1:
-                    // Mostrar lista de clientes cargados en el sistema
+                    // Mostrar lista de clientes registrados en el sistema
                     sistema.mostrarClientes();
                     break;
 
                 case 2:
-                    // Mostrar todos los tickets (de todos los clientes)
+                    // Mostrar todos los tickets asociados a todos los clientes
                     sistema.mostrarTickets();
                     break;
 
                 case 3:
-                    // Agregar un nuevo ticket a un cliente existente
+                    // Agregar un nuevo ticket a un cliente
                     System.out.print("ID Cliente: ");
                     String idClienteNuevo = sc.nextLine();
                     System.out.print("ID Ticket: ");
@@ -69,12 +69,12 @@ public class Main {
                     System.out.print("Nuevo tiempo de respuesta (h): ");
                     int tiempoEditado = sc.nextInt();
                     sc.nextLine();
-                    sistema.editarTicket(idClienteEditar, idTicketEditar, 
+                    sistema.editarTicket(idClienteEditar, idTicketEditar,
                                          descripcionEditada, estadoEditado, tiempoEditado);
                     break;
 
                 case 5:
-                    // Eliminar un ticket
+                    // Eliminar un ticket por su ID
                     System.out.print("ID Cliente: ");
                     String idClienteEliminar = sc.nextLine();
                     System.out.print("ID Ticket: ");
@@ -83,14 +83,14 @@ public class Main {
                     break;
 
                 case 6:
-                    // Filtrar tickets según estado (ej: Pendiente o Resuelto)
+                    // Filtrar tickets por estado (Pendiente o Resuelto)
                     System.out.print("Ingrese estado a filtrar (Pendiente, Resuelto): ");
                     String estadoFiltrado = sc.nextLine();
                     sistema.filtrarTicketsPorEstado(estadoFiltrado);
                     break;
 
                 case 7:
-                    // Filtrar tickets por cierto tiempo de respuesta
+                    // Filtrar tickets según un tiempo de respuesta específico
                     System.out.print("Ingrese horas a filtrar: ");
                     int limiteHoras = sc.nextInt();
                     sc.nextLine();
@@ -98,13 +98,13 @@ public class Main {
                     break;
 
                 case 0:
-                    System.out.println("Saliendo...");
+                    System.out.println("Saliendo del sistema...");
                     break;
 
                 default:
-                    System.out.println("Opción inválida");
+                    System.out.println("Opción inválida, intente nuevamente.");
             }
-        } while(opcion != 0);
+        } while (opcion != 0);
 
         // Cerrar scanner
         sc.close();
