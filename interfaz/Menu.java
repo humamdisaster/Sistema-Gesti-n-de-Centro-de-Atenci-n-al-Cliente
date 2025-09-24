@@ -1,17 +1,22 @@
 package interfaz;
 
 //import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	JButton btnTickets, btnClientes, btnTicketAdd, btnSalir;
 
 	/**
 	 * Create the frame.
@@ -30,20 +35,24 @@ public class Menu extends JFrame {
 		lblTitulo.setBounds(85, 11, 175, 14);
 		contentPane.add(lblTitulo);
 		
-		JButton btnTickets = new JButton("Ver Tickets");
+		btnTickets = new JButton("Ver Tickets");
 		btnTickets.setBounds(200, 130, 110, 25);
+		btnTickets.addActionListener(this);
 		contentPane.add(btnTickets);
 		
-		JButton btnTicketAdd = new JButton("Añadir Ticket");
+		btnTicketAdd = new JButton("Añadir Ticket");
 		btnTicketAdd.setBounds(200, 170, 110, 25);
+		btnTicketAdd.addActionListener(this);
 		contentPane.add(btnTicketAdd);
 		
-		JButton btnSalir = new JButton("Salir");
+		btnSalir = new JButton("Salir");
 		btnSalir.setBounds(200, 210, 110, 25);
+		btnSalir.addActionListener(this);
 		contentPane.add(btnSalir);
 		
-		JButton btnClientes = new JButton("Ver Clientes");
+		btnClientes = new JButton("Ver Clientes");
 		btnClientes.setBounds(200, 90, 110, 25);
+		btnClientes.addActionListener(this);
 		contentPane.add(btnClientes);
 		
 		JLabel lblClientes = new JLabel("Ver Lista Clientes");
@@ -63,4 +72,18 @@ public class Menu extends JFrame {
 		contentPane.add(lblSalir);
 
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSalir) {
+			System.out.println("Saliendo del Programa...");
+			System.exit(0);
+		}
+		if (e.getSource() == btnClientes) {
+			VerClientes PanClientes = new VerClientes();
+			this.setVisible(false);
+			PanClientes.setVisible(true);
+		}
+	}
+	
 }

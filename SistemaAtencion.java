@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -44,6 +46,12 @@ public class SistemaAtencion {
         }
     }
 
+    
+    public void agregarCliente(String idCliente, String nomCliente, String mailCliente) {
+    	Cliente nuevoCliente = new Cliente(idCliente, nomCliente, mailCliente);
+    	clientes.put(nuevoCliente.getId(), nuevoCliente);
+    }
+    
     /**
      * Muestra la lista de clientes.
      */
@@ -116,4 +124,5 @@ public class SistemaAtencion {
             }
         }
     }
+    
 }

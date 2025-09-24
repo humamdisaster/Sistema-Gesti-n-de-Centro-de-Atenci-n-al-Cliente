@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.*;
+
+// Importación coleccion de interfaz grafica
 import interfaz.*;
 
 /**
@@ -8,11 +11,8 @@ import interfaz.*;
  */
 public class Main {
 
-    /**
-     * Método principal que arranca el programa.
-     * Menú interactivo para gestionar clientes y tickets.
-     */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+    	
         // Inicialización de la pantalla gráfica (Prueba)
         Menu menu = new Menu();
         menu.setVisible(true);
@@ -21,6 +21,33 @@ public class Main {
         SistemaAtencion sistema = new SistemaAtencion();
         Scanner sc = new Scanner(System.in);
         int opcion;
+        
+        
+     // Lectura de datos desde archivo .csv
+    	File csvClientes = new File("clientes.csv");
+    	
+    	// Se verifica si el archivo clientes.csv existe o no, de no existir lo crear para guardar los de la sesion
+    	if (csvClientes.exists()) {
+    		// System.out.println("El archivo extiste :p");
+    		FileReader fileR = new FileReader(csvClientes);
+    		BufferedReader bufferR = new BufferedReader(fileR);
+    		// System.out.println("Esto deberia de imprimir los clientes:p");
+    		String linea;
+    		while((linea = bufferR.readLine()) != null) {
+    			String[] cadenas = linea.split(",");
+    			sistema.agregarCliente(cadenas[0], cadenas[1], cadenas[2]);
+    			// nTicket se asignara por orden de llegada
+    			sistema.agregarTicket(cadenas[0], "nTicket", cadenas[3]);
+    			}
+    		sistema.mostrarTickets();
+    		bufferR.close();
+    		}
+    		
+    	else {
+			csvClientes.createNewFile();	
+    		System.out.println("El archivo no existe :c, pero fue creado");
+    		}
+        
 
         do {
             // Mostrar menú principal por consola
