@@ -15,18 +15,15 @@ public class MenuGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private AddTicketGUI venTickets;
 	
 	private JButton btnTickets, btnClientes, btnTicketAdd, btnSalir;
 	
-	//private AppListener listener;
+	private AppListener listener;
 
 	/**
 	 * Create the frame.
 	 */
-	public MenuGUI(AddTicketGUI venTickets) {
-		this.venTickets = venTickets;
-		
+	public MenuGUI() {
 		setTitle("Sistema Gestión de Tickets");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,17 +75,16 @@ public class MenuGUI extends JFrame implements ActionListener {
 
 	}
 	
-	//public void setListener(AppListener l) {this.listener = l;}
+	public void setListener(AppListener l) {this.listener = l;}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnClientes) {listener.AbrirVerClientes();}
+		if (e.getSource() == btnTickets) {listener.AbrirVerTickets();}
+		if (e.getSource() == btnTicketAdd) {listener.AbrirAddTicket();}
 		if (e.getSource() == btnSalir) {
 			System.out.println("Saliendo del Programa...");
 			System.exit(0);
-		}
-		if (e.getSource() == btnTicketAdd) {
-			setVisible(false);
-			venTickets.setVisible(true);
 		}
 	}
 	
