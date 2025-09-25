@@ -32,9 +32,9 @@ public class Main {
     		int nTicket = 1;
     		while((linea = bufferR.readLine()) != null) {
     			String[] cadenas = linea.split(",");
-    			sistema.agregarCliente(cadenas[0], cadenas[1], cadenas[2]);
+    			sistema.agregarCliente(cadenas[1], cadenas[2]);
     			// nTicket se asignara por orden de llegada
-    			sistema.agregarTicket(cadenas[0], "T"+ nTicket, cadenas[3]);
+    			sistema.agregarTicket(cadenas[0], cadenas[3]);
     			nTicket += 1;
     			}
     		bufferR.close();
@@ -58,6 +58,10 @@ public class Main {
             System.out.println("5. Eliminar ticket");
             System.out.println("6. Filtrar tickets por estado");
             System.out.println("7. Filtrar tickets por tiempo de respuesta");
+            System.out.println("8. Agregar cliente");
+            System.out.println("9. Eliminar cliente");
+            System.out.println("10. Buscar cliente");
+            System.out.println("11. Buscar ticket por ID");
             System.out.println("0. Salir");
             System.out.print("Seleccione opción: ");
 
@@ -81,11 +85,9 @@ public class Main {
                     // Agregar un nuevo ticket a un cliente
                     System.out.print("ID Cliente: ");
                     String idClienteNuevo = sc.nextLine();
-                    System.out.print("ID Ticket: ");
-                    String idTicketNuevo = sc.nextLine();
                     System.out.print("Descripción: ");
                     String descripcionNueva = sc.nextLine();
-                    sistema.agregarTicket(idClienteNuevo, idTicketNuevo, descripcionNueva);
+                    sistema.agregarTicket(idClienteNuevo, descripcionNueva);
                     break;
 
                 case 4:
@@ -129,6 +131,46 @@ public class Main {
                     int limiteHoras = sc.nextInt();
                     sc.nextLine();
                     sistema.filtrarTicketsPorTiempo(limiteHoras);
+                    break;
+                
+                case 8:
+                    // Agregar cliente
+                    System.out.print("Nombre del cliente: ");
+                    String nuevoNombre = sc.nextLine();
+                    System.out.print("Email: ");
+                    String nuevoEmail = sc.nextLine();
+                    sistema.agregarCliente(nuevoNombre, nuevoEmail);
+                    break;
+
+                case 9:
+                    // Eliminar cliente
+                    System.out.print("ID Cliente: ");
+                    String idEliminarCliente = sc.nextLine();
+                    sistema.eliminarCliente(idEliminarCliente);
+                    break;
+
+                case 10:
+                    // Buscar cliente por ID o nombre
+                    System.out.print("Ingrese ID o nombre de cliente: ");
+                    String criterioCliente = sc.nextLine();
+                    Cliente cliente = sistema.buscarCliente(criterioCliente);
+                    if (cliente != null) {
+                        System.out.println("Cliente encontrado: " + cliente.info(true));
+                    } else {
+                        System.out.println("Cliente no encontrado.");
+                    }
+                    break;
+
+                case 11:
+                    // Buscar ticket por ID
+                    System.out.print("Ingrese ID Ticket: ");
+                    String idTicketBuscar = sc.nextLine();
+                    Ticket ticket = sistema.buscarTicket(idTicketBuscar);
+                    if (ticket != null) {
+                        System.out.println("Ticket encontrado: " + ticket.resumen(true));
+                    } else {
+                        System.out.println("Ticket no encontrado.");
+                    }
                     break;
 
                 case 0:
