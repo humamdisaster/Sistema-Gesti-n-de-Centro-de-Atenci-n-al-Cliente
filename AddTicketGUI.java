@@ -11,8 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-import java.util.*;
-
 public class AddTicketGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -23,17 +21,14 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	private JTextField textMail;
 	private JButton btnVolver;
 	private JButton btnAdd;
+	private JTextArea textDesc;
 	
-	private Map<String, Cliente> clientes;
-	
-	//private AppListener listener;
+	private AppListener listener;
 	
 	/**
 	 * Create the frame.
 	 */
-	public AddTicketGUI(Map<String, Cliente> clientes) {
-		this.clientes = clientes;
-		
+	public AddTicketGUI() {	
 		setTitle("Sistema Gestión de Tickets");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +56,8 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		contentPane.add(textMail);
 		textMail.setColumns(10);
 		
-		JTextArea textDesc = new JTextArea();
+		textDesc = new JTextArea();
+		textDesc.setLineWrap(true);
 		textDesc.setBounds(23, 176, 301, 129);
 		contentPane.add(textDesc);
 		
@@ -92,33 +88,43 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		contentPane.add(lblDesc);
 		
 		comboBox.addItem("Eliga un cliente");
+		comboBox.addItem("Nuevo Cliente");
 		
 		comboBox.addActionListener(this);
 
 	}
 	
-	//public void setListener(AppListener l) {this.listener = l;}
+	public void setListener(AppListener l) {this.listener = l;}
 	
-	public void leerClientes() {
-		for (Cliente cliente : clientes.values()) {
-    		comboBox.addItem(String.valueOf(cliente.getId()));
-    	}
+	public boolean inComboBox(String id) {
+		for (int i = 0 ; i < comboBox.getItemCount() ; i++) {
+			if (comboBox.getItemAt(i) == id) {return true;}
+		}
+		return false;
 	}
 	
-	public void rellenar(Cliente cliente) {
-		textName.setText(cliente.nombre);
-		textMail.setText(cliente.email);
+	public void agregarCombo(String n) {comboBox.addItem(n);}
+	
+	public void leerClientes() {
+		listener.llenarComboClientes();
+	}
+	
+	public void llenarCliente(String name, String mail) {
+		textName.setText(name);
+		textMail.setText(mail);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == comboBox) {
-			for (Cliente cliente : clientes.values()) {
-				if (cliente.getId() == comboBox.getSelectedItem()) {
-					rellenar(cliente);
-				}
+			if (comboBox.getSelectedItem() != "Eliga un cliente") {comboBox.removeItem("Eliga un cliente");}
+			if (comboBox.getSelectedItem() == "Nuevo Cliente") {
+				textName.setText("");
+				textMail.setText("");
 			}
+			listener.rellenarCliente((String) comboBox.getSelectedItem());
 		}
+		if (e.getSource() == btnAdd) {listener.NuevoTicket((String) comboBox.getSelectedItem(), "nTicket", textDesc.getText());}
 	}
 }

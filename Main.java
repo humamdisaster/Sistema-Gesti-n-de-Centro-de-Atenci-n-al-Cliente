@@ -16,8 +16,8 @@ public class Main {
         
         
         // Inicialización ventanas interfaz grafica
-        AddTicketGUI menuTickets = new AddTicketGUI(sistema.getClientes());
-        MenuGUI menu = new MenuGUI(menuTickets);
+        AddTicketGUI menuTickets = new AddTicketGUI();
+        MenuGUI menu = new MenuGUI();
         
         // Lectura de datos desde archivo .csv
         File csvClientes = new File("clientes.csv");
@@ -29,22 +29,21 @@ public class Main {
     		BufferedReader bufferR = new BufferedReader(fileR);
     		// System.out.println("Esto deberia de imprimir los clientes:p");
     		String linea;
-    		int nTicket = 1;
     		while((linea = bufferR.readLine()) != null) {
     			String[] cadenas = linea.split(",");
     			sistema.agregarCliente(cadenas[1], cadenas[2]);
     			// nTicket se asignara por orden de llegada
     			sistema.agregarTicket(cadenas[0], cadenas[3]);
-    			nTicket += 1;
     			}
     		bufferR.close();
     	}
-    	
     		
     	else {
 			csvClientes.createNewFile();	
     		System.out.println("El archivo no existe :c, pero fue creado");
     		}
+    	
+    	Controlador c = new Controlador(menu, menuTickets, sistema);
         
         do {  
         	menu.setVisible(true);
