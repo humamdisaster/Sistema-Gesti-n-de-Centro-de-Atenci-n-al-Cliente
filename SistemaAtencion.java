@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -7,10 +5,11 @@ import java.util.*;
  * Gestiona clientes y delega operaciones sobre sus tickets.
  */
 public class SistemaAtencion {
-    private Map<String, Cliente> clientes = new HashMap<>();
+    private Map<String, Cliente> clientes = new TreeMap<>();
 
     public SistemaAtencion() {
         // Datos iniciales
+    	/*
         Cliente c1 = new Cliente("C01", "Ana Pérez", "ana@mail.com");
         Cliente c2 = new Cliente("C02", "Luis Gómez", "luis@mail.com");
 
@@ -19,8 +18,11 @@ public class SistemaAtencion {
 
         c1.agregarTicket(new Ticket("T01", "Problema con facturación"));
         c2.agregarTicket(new Ticket("T02", "No puedo iniciar sesión"));
+        */
     }
 
+    public Map<String, Cliente> getClientes(){ return clientes; }
+    
     /**
      * Agrega un ticket a un cliente existente.
      */
@@ -49,6 +51,10 @@ public class SistemaAtencion {
     
     public void agregarCliente(String idCliente, String nomCliente, String mailCliente) {
     	Cliente nuevoCliente = new Cliente(idCliente, nomCliente, mailCliente);
+    	if (clientes.containsKey(nuevoCliente.getId())) {
+    		System.out.println("El cliente ya existe");
+    		return;
+    	}
     	clientes.put(nuevoCliente.getId(), nuevoCliente);
     }
     

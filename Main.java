@@ -1,9 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
 
-// Importación coleccion de interfaz grafica
-import interfaz.*;
-
 /**
  * Main.java
  * Punto de entrada del sistema de atención de tickets.
@@ -12,19 +9,18 @@ import interfaz.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-    	
-        // Inicialización de la pantalla gráfica (Prueba)
-        Menu menu = new Menu();
-        menu.setVisible(true);
-
         // Instancia del sistema que maneja los clientes y tickets
         SistemaAtencion sistema = new SistemaAtencion();
         Scanner sc = new Scanner(System.in);
         int opcion;
         
         
-     // Lectura de datos desde archivo .csv
-    	File csvClientes = new File("clientes.csv");
+        // Inicialización ventanas interfaz grafica
+        AddTicketGUI menuTickets = new AddTicketGUI(sistema.getClientes());
+        MenuGUI menu = new MenuGUI(menuTickets);
+        
+        // Lectura de datos desde archivo .csv
+        File csvClientes = new File("clientes.csv");
     	
     	// Se verifica si el archivo clientes.csv existe o no, de no existir lo crear para guardar los de la sesion
     	if (csvClientes.exists()) {
@@ -33,23 +29,26 @@ public class Main {
     		BufferedReader bufferR = new BufferedReader(fileR);
     		// System.out.println("Esto deberia de imprimir los clientes:p");
     		String linea;
+    		int nTicket = 1;
     		while((linea = bufferR.readLine()) != null) {
     			String[] cadenas = linea.split(",");
     			sistema.agregarCliente(cadenas[0], cadenas[1], cadenas[2]);
     			// nTicket se asignara por orden de llegada
-    			sistema.agregarTicket(cadenas[0], "nTicket", cadenas[3]);
+    			sistema.agregarTicket(cadenas[0], "T"+ nTicket, cadenas[3]);
+    			nTicket += 1;
     			}
-    		sistema.mostrarTickets();
     		bufferR.close();
-    		}
+    	}
+    	
     		
     	else {
 			csvClientes.createNewFile();	
     		System.out.println("El archivo no existe :c, pero fue creado");
     		}
         
-
-        do {
+        do {  
+        	menu.setVisible(true);
+        	menuTickets.leerClientes();
             // Mostrar menú principal por consola
             System.out.println("\n--- MENU ---");
             System.out.println("1. Mostrar clientes");
@@ -78,6 +77,7 @@ public class Main {
                     break;
 
                 case 3:
+                	
                     // Agregar un nuevo ticket a un cliente
                     System.out.print("ID Cliente: ");
                     String idClienteNuevo = sc.nextLine();

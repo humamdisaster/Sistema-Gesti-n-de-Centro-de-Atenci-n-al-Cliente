@@ -1,4 +1,4 @@
-package interfaz;
+
 
 //import java.awt.EventQueue;
 //import java.awt.EventQueue;
@@ -11,17 +11,22 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Menu extends JFrame implements ActionListener {
+public class MenuGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private AddTicketGUI venTickets;
 	
-	JButton btnTickets, btnClientes, btnTicketAdd, btnSalir;
+	private JButton btnTickets, btnClientes, btnTicketAdd, btnSalir;
+	
+	private AppListener listener;
 
 	/**
 	 * Create the frame.
 	 */
-	public Menu() {
+	public MenuGUI(AddTicketGUI venTickets) {
+		this.venTickets = venTickets;
+		
 		setTitle("Sistema Gestión de Tickets");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,17 +77,18 @@ public class Menu extends JFrame implements ActionListener {
 		contentPane.add(lblSalir);
 
 	}
-
+	
+	public void setListener(AppListener l) {this.listener = l;}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSalir) {
 			System.out.println("Saliendo del Programa...");
 			System.exit(0);
 		}
-		if (e.getSource() == btnClientes) {
-			VerClientes PanClientes = new VerClientes();
-			this.setVisible(false);
-			PanClientes.setVisible(true);
+		if (e.getSource() == btnTicketAdd) {
+			setVisible(false);
+			venTickets.setVisible(true);
 		}
 	}
 	
