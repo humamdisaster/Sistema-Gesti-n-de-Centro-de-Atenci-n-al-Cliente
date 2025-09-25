@@ -94,7 +94,7 @@ public class Controlador implements AppListener{
 	@Override
 	public void NuevoTicket(String idCliente, String idTicket, String desc) {
 		// TODO Auto-generated method stub
-		sistema.agregarTicket(idCliente, idTicket, desc);
+		sistema.agregarTicket(idCliente, desc);
 		menuTickets.setVisible(false);
 		menuPrincipal.setVisible(true);
 	}
