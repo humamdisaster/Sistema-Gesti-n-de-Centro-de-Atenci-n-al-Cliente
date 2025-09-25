@@ -11,8 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-import java.util.*;
-
 public class AddTicketGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;

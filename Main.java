@@ -37,7 +37,6 @@ public class Main {
     			}
     		bufferR.close();
     	}
-    	
     		
     	else {
 			csvClientes.createNewFile();	
