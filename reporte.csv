@@ -1,5 +1,5 @@
 ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion
 C01,Nombre Generico 5,generico5@mail.com,T01,Problema Generico 1,Pendiente,0,0
 C01,Nombre Generico 5,generico5@mail.com,T03,Problema Generico 1,Pendiente,0,0
+C01,Nombre Generico 5,generico5@mail.com,T04,Test,Pendiente,0,0
 C02,Nombre Generico 1,generico1@mail.com,T02,Problema Generico 2,Pendiente,0,0
-C06,Nombre Generico 100,generico100@mail.com,T04,Test reporte por ventana,Pendiente,0,0
