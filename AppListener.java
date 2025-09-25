@@ -14,4 +14,5 @@ public interface AppListener {
 	void NuevoTicket(String idCliente, String idTicket, String desc);
 	void llenarComboClientes();
 	void rellenarCliente(String id);
+	void generarReporteYCerrar();
 }

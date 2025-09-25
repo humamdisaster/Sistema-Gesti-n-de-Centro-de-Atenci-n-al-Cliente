@@ -21,7 +21,15 @@ public class MenuGUI extends JFrame implements ActionListener {
 	public MenuGUI() {
 		setTitle("Sistema Gestión de Tickets");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent e) {
+		        if (listener != null) {
+		            listener.generarReporteYCerrar();
+		        }
+		    }
+		});
 		setBounds(100, 100, 350, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,8 +86,9 @@ public class MenuGUI extends JFrame implements ActionListener {
 		if (e.getSource() == btnTickets) {listener.AbrirVerTickets();}
 		if (e.getSource() == btnTicketAdd) {listener.AbrirAddTicket();}
 		if (e.getSource() == btnSalir) {
-			System.out.println("Saliendo del Programa...");
-			System.exit(0);
+		    if (listener != null) {
+		        listener.generarReporteYCerrar();
+		    }
 		}
 	}
 	
