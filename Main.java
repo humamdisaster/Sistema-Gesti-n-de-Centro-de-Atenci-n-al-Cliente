@@ -174,9 +174,10 @@ public class Main {
                     break;
 
                 case 0:
-                    System.out.println("Saliendo del sistema...");
+                    System.out.println("Generando reporte y saliendo del sistema...");
+                    sistema.generarReporte("reporte.csv");
                     break;
-
+                    
                 default:
                     System.out.println("Opción inválida, intente nuevamente.");
             }

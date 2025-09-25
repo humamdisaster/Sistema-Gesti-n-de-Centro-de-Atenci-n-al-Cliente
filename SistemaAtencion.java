@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 /**
  * SistemaAtencion
@@ -202,4 +203,34 @@ public class SistemaAtencion {
         }
         return null;
     }
+    
+    /**
+     * Genera un reporte con todos los clientes y sus tickets en un archivo CSV.
+     * @param nombreArchivo ruta del archivo a crear/reescribir
+     */
+    public void generarReporte(String nombreArchivo) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
+            // Encabezado CSV
+            writer.println("ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion");
+
+            // Recorrer clientes y tickets
+            for (Cliente cliente : clientes.values()) {
+                for (Ticket ticket : cliente.getTickets()) {
+                    writer.printf("%s,%s,%s,%s,%s,%s,%d,%d%n",
+                            cliente.getId(),
+                            cliente.getNombre(),
+                            cliente.getEmail(),
+                            ticket.getId(),
+                            ticket.getDescripcion().replace(",", ";"), // evitar conflicto con CSV
+                            ticket.getEstado(),
+                            ticket.getTiempoRespuesta(),
+                            ticket.getSatisfaccion());
+                }
+            }
+            System.out.println("Reporte generado correctamente en " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al generar el reporte: " + e.getMessage());
+        }
+    }
+
 }
