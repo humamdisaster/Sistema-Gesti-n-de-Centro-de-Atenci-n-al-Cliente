@@ -26,7 +26,7 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	
 	private Map<String, Cliente> clientes;
 	
-	private AppListener listener;
+	//private AppListener listener;
 	
 	/**
 	 * Create the frame.
@@ -97,7 +97,7 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 
 	}
 	
-	public void setListener(AppListener l) {this.listener = l;}
+	//public void setListener(AppListener l) {this.listener = l;}
 	
 	public void leerClientes() {
 		for (Cliente cliente : clientes.values()) {

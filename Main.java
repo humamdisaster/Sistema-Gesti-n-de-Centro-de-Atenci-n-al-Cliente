@@ -101,7 +101,10 @@ public class Main {
                     System.out.print("Nuevo tiempo de respuesta (h): ");
                     int tiempoEditado = sc.nextInt();
                     sc.nextLine();
-                    sistema.editarTicket(idClienteEditar, idTicketEditar, descripcionEditada, estadoEditado, tiempoEditado);
+                    System.out.print("Nivel de satisfacción (1-5): ");
+                    int satisfaccionEditada = sc.nextInt();
+                    sc.nextLine();
+                    sistema.editarTicket(idClienteEditar, idTicketEditar, descripcionEditada, estadoEditado, tiempoEditado, satisfaccionEditada);
                     break;
 
                 case 5:

@@ -7,6 +7,7 @@ public class Ticket {
     private String descripcion;
     private String estado;
     private int tiempoRespuesta; // en horas
+    private int satisfaccion;
 
     /**
      * Constructor: crea un ticket en estado "Pendiente" con tiempo 0.
@@ -18,6 +19,7 @@ public class Ticket {
         this.descripcion = descripcion;
         this.estado = "Pendiente";
         this.tiempoRespuesta = 0;
+        this.satisfaccion = 0;
     }
 
     // Getters y setters
@@ -32,6 +34,9 @@ public class Ticket {
 
     public int getTiempoRespuesta() { return tiempoRespuesta; }
     public void setTiempoRespuesta(int tiempoRespuesta) { this.tiempoRespuesta = tiempoRespuesta; }
+    
+    public int getSatisfaccion() { return satisfaccion; }
+    public void setSatisfaccion(int satisfaccion) { this.satisfaccion = satisfaccion; }
 
     /**
      * Sobrescribe toString().
@@ -39,7 +44,7 @@ public class Ticket {
      */
     @Override
     public String toString() {
-        return "[" + id + "] " + descripcion + " - Estado: " + estado + " | Tiempo resp: " + tiempoRespuesta + "h";
+        return "[" + id + "] " + descripcion + " - Estado: " + estado + " | Tiempo resp: " + tiempoRespuesta + "h" + " Satisfacción del Cliente: " + satisfaccion;
     }
 
     /**

@@ -70,7 +70,7 @@ public class SistemaAtencion {
     /**
      * Edita un ticket de un cliente.
      */
-    public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo) {
+    public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo, int nuevaSatisfaccion) {
         Cliente cliente = clientes.get(idCliente);
         if (cliente != null) {
             Ticket ticket = cliente.buscarTicket(idTicket);
@@ -78,6 +78,7 @@ public class SistemaAtencion {
                 ticket.setDescripcion(nuevaDescripcion);
                 ticket.setEstado(nuevoEstado);
                 ticket.setTiempoRespuesta(nuevoTiempo);
+                ticket.setSatisfaccion(nuevaSatisfaccion);
                 System.out.println("Ticket editado.");
             } else {
                 System.out.println("Ticket no encontrado.");

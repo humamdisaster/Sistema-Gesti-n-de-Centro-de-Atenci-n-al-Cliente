@@ -19,7 +19,7 @@ public class MenuGUI extends JFrame implements ActionListener {
 	
 	private JButton btnTickets, btnClientes, btnTicketAdd, btnSalir;
 	
-	private AppListener listener;
+	//private AppListener listener;
 
 	/**
 	 * Create the frame.
@@ -78,7 +78,7 @@ public class MenuGUI extends JFrame implements ActionListener {
 
 	}
 	
-	public void setListener(AppListener l) {this.listener = l;}
+	//public void setListener(AppListener l) {this.listener = l;}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
