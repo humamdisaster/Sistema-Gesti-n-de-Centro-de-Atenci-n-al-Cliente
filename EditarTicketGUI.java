@@ -7,7 +7,7 @@ public class EditarTicketGUI extends JFrame {
     private JPanel contentPane;
     private JComboBox<String> comboClientes;
     private JComboBox<String> comboTickets;
-    private JTextField txtDescripcion;
+    private JTextArea txtDescripcion;
     private JComboBox<String> comboEstado;
     private JComboBox<Integer> comboSatisfaccion;
     private JButton btnGuardar, btnVolver;
@@ -39,9 +39,13 @@ public class EditarTicketGUI extends JFrame {
         lblDesc.setBounds(30, 80, 100, 25);
         contentPane.add(lblDesc);
 
-        txtDescripcion = new JTextField();
-        txtDescripcion.setBounds(130, 80, 250, 25);
-        contentPane.add(txtDescripcion);
+        txtDescripcion = new JTextArea();
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setWrapStyleWord(true);
+
+        JScrollPane scrollDesc = new JScrollPane(txtDescripcion);
+        scrollDesc.setBounds(130, 80, 250, 80);
+        contentPane.add(scrollDesc);
 
         // Estado
         JLabel lblEstado = new JLabel("Estado:");
