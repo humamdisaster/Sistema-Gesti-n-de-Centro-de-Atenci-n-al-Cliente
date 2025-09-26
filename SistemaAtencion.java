@@ -236,32 +236,36 @@ public class SistemaAtencion {
     
     public void generarReporte(String nombreArchivo) {
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
-            
+
             // Encabezado
             writer.append("ID Cliente;Nombre;Correo;Acción\n");
 
             // Recorrer todos los clientes
             for (Cliente cliente : clientes.values()) {
-                
-                // Si el cliente no tiene historial, igual lo escribimos
+                // Escribir datos del cliente en una primera fila
+                writer.append(cliente.getId()).append(";")
+                      .append(cliente.getNombre()).append(";")
+                      .append(cliente.getEmail()).append(";");
+
                 if (cliente.getHistorial().isEmpty()) {
-                    writer.append(cliente.getId()).append(";")
-                          .append(cliente.getNombre()).append(";")
-                          .append(cliente.getEmail()).append(";")
-                          .append("Sin acciones registradas\n");
+                    writer.append("Sin acciones registradas\n");
                 } else {
-                    // Si tiene historial, escribimos cada acción en una fila
+                    writer.append("\n"); // salto de línea para empezar historial
+
+                    // Escribir cada acción en filas nuevas
                     for (String accion : cliente.getHistorial()) {
-                        writer.append(cliente.getId()).append(";")
-                              .append(cliente.getNombre()).append(";")
-                              .append(cliente.getEmail()).append(";")
+                        writer.append(";") // columna ID vacía
+                              .append(";") // columna Nombre vacía
+                              .append(";") // columna Correo vacía
                               .append(accion).append("\n");
                     }
                 }
+
+                writer.append("\n"); // línea en blanco para separar clientes
             }
-            
+
             System.out.println("Reporte generado en " + nombreArchivo);
-            
+
         } catch (IOException e) {
             System.err.println("Error al generar reporte: " + e.getMessage());
         }
