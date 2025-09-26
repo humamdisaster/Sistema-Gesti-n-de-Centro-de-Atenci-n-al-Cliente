@@ -168,7 +168,7 @@ public class Controlador implements AppListener {
 
     @Override
     public void generarReporteYCerrar() {
-        sistema.generarReporte("reporte.csv");
+        sistema.generarReporte("clientes.csv");
         System.exit(0);
     }
 }

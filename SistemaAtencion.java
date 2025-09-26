@@ -58,6 +58,7 @@ public class SistemaAtencion {
      * Agrega un nuevo ticket a un cliente existente, con ID generado automáticamente.
      * @param idCliente ID del cliente
      * @param descripcionTicket descripción del ticket
+     * throws ClienteNoExisteException
      */
     public void agregarTicket(String idCliente, String descripcionTicket) {
         Cliente cliente = clientes.get(idCliente);
@@ -227,7 +228,7 @@ public class SistemaAtencion {
                             ticket.getSatisfaccion());
                 }
             }
-            System.out.println("Reporte generado correctamente en " + nombreArchivo);
+            System.out.println("Cabios guardados correctamente en " + nombreArchivo);
         } catch (IOException e) {
             System.out.println("Error al generar el reporte: " + e.getMessage());
         }

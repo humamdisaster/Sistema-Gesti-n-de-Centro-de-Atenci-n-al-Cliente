@@ -1,6 +1,5 @@
-C05,Nombre Generico 5,generico5@mail.com,Problema Generico 5
-C01,Nombre Generico 1,generico1@mail.com,Problema Generico 1
-C02,Nombre Generico 2,generico2@mail.com,Problema Generico 2
-C01,Nombre Generico 1,generico1@mail.com,Problema Generico 1
-C10,Nombre Generico 10,generico10@mail.com,Problema Generico 10
-C100,Nombre Generico 100,generico100@mail.com,Problema Generico 100
+ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion
+C01,Nombre,Correo,T01,T02,Pendiente,0,0
+C02,Nombre,Correo,T02,T03,Pendiente,0,0
+C02,Nombre,Correo,T03,T05,Pendiente,0,0
+C03,Nombre Generico 5,generico5@mail.com,T04,T04,Pendiente,0,0

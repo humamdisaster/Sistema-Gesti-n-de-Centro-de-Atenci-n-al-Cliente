@@ -118,7 +118,7 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == comboBox) {
-			if (comboBox.getSelectedItem() != "Eliga un cliente") {comboBox.removeItem("Eliga un cliente");}
+			if (comboBox.getSelectedItem() != "Elija un cliente") {comboBox.removeItem("Elija un cliente");}
 			if (comboBox.getSelectedItem() == "Nuevo Cliente") {
 				textName.setText("");
 				textMail.setText("");
