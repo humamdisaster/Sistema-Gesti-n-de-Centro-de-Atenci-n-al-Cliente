@@ -1,4 +1,10 @@
-ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion
-C01,Nombre Generico 5,generico5@mail.com,T03,Problema Generico 1,Pendiente,0,0
-C01,Nombre Generico 5,generico5@mail.com,T04,test,Resuelto,0,4
-C02,Nombre Generico 1,generico1@mail.com,T02,Problema Generico 2,Pendiente,0,0
+ID Cliente;Nombre;Correo;Acción
+C01;Nombre;Correo;Se agregó ticket con ID: T05 y descripción: "test para historial"
+C01;Nombre;Correo;Se editó ticket T05 → nueva desc: "test para historial", estado: Resuelto, satisfacción: 5
+C01;Nombre;Correo;Se eliminó ticket con ID: T05
+C02;Nombre;Correo;Se agregó ticket con ID: T01 y descripción: "T02"
+C02;Nombre;Correo;Se agregó ticket con ID: T02 y descripción: "T03"
+C03;Nombre;Correo;Se agregó ticket con ID: T03 y descripción: "T04"
+C03;Nombre;Correo;Se editó ticket T03 → nueva desc: "Test para historial", estado: Resuelto, satisfacción: 5
+C04;Nombre;Correo;Sin acciones registradas
+C05;Nombre Generico 5;generico5@mail.com;Se agregó ticket con ID: T04 y descripción: "T05"

@@ -209,7 +209,7 @@ public class SistemaAtencion {
      * Genera un reporte con todos los clientes y sus tickets en un archivo CSV.
      * @param nombreArchivo ruta del archivo a crear/reescribir
      */
-    public void generarReporte(String nombreArchivo) {
+    public void guardarCambios(String nombreArchivo) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
             // Encabezado CSV
             writer.println("ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion");
@@ -233,5 +233,37 @@ public class SistemaAtencion {
             System.out.println("Error al generar el reporte: " + e.getMessage());
         }
     }
+    
+    public void generarReporte(String nombreArchivo) {
+        try (FileWriter writer = new FileWriter(nombreArchivo)) {
+            
+            // Encabezado
+            writer.append("ID Cliente;Nombre;Correo;Acción\n");
 
+            // Recorrer todos los clientes
+            for (Cliente cliente : clientes.values()) {
+                
+                // Si el cliente no tiene historial, igual lo escribimos
+                if (cliente.getHistorial().isEmpty()) {
+                    writer.append(cliente.getId()).append(";")
+                          .append(cliente.getNombre()).append(";")
+                          .append(cliente.getEmail()).append(";")
+                          .append("Sin acciones registradas\n");
+                } else {
+                    // Si tiene historial, escribimos cada acción en una fila
+                    for (String accion : cliente.getHistorial()) {
+                        writer.append(cliente.getId()).append(";")
+                              .append(cliente.getNombre()).append(";")
+                              .append(cliente.getEmail()).append(";")
+                              .append(accion).append("\n");
+                    }
+                }
+            }
+            
+            System.out.println("Reporte generado en " + nombreArchivo);
+            
+        } catch (IOException e) {
+            System.err.println("Error al generar reporte: " + e.getMessage());
+        }
+    }
 }

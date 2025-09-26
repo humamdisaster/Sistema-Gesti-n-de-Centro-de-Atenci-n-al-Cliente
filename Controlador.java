@@ -90,6 +90,12 @@ public class Controlador implements AppListener {
             t.setDescripcion(nuevaDescripcion);
             t.setEstado(nuevoEstado);
             t.setSatisfaccion(nuevaSatisfaccion);
+
+            Cliente cliente = sistema.getClientes().get(idCliente);
+            if (cliente != null) {
+                cliente.registrarEdicion(t, nuevaDescripcion, nuevoEstado, nuevaSatisfaccion);
+            }
+
             System.out.println("Ticket actualizado desde GUI.");
         }
     }
@@ -168,7 +174,8 @@ public class Controlador implements AppListener {
 
     @Override
     public void generarReporteYCerrar() {
-        sistema.generarReporte("clientes.csv");
+        sistema.guardarCambios("clientes.csv");
+        sistema.generarReporte("reporte.csv");
         System.exit(0);
     }
 }

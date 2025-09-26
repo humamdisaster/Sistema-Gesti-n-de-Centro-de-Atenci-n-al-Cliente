@@ -3,10 +3,12 @@ import java.util.List;
 
 /**
  * Cliente.java
- * Representa un cliente del sistema con su lista de tickets asociados.
+ * Representa un cliente del sistema con su lista de tickets asociados
+ * y un historial de acciones realizadas sobre esos tickets.
  */
 public class Cliente extends Persona {
     private List<Ticket> tickets;
+    private List<String> historial;
 
     /**
      * Crea un nuevo cliente con una lista de tickets vacía.
@@ -17,6 +19,7 @@ public class Cliente extends Persona {
     public Cliente(String id, String nombre, String email) {
         super(id, nombre, email);
         this.tickets = new ArrayList<>();
+        this.historial = new ArrayList<>();
     }
 
     /**
@@ -25,6 +28,30 @@ public class Cliente extends Persona {
      */
     public void agregarTicket(Ticket ticket) {
         tickets.add(ticket);
+        historial.add("Se agregó ticket con ID: " + ticket.getId() + 
+                      " y descripción: \"" + ticket.getDescripcion() + "\"");
+    }
+
+    /**
+     * Registra una edición en el historial.
+     */
+    public void registrarEdicion(Ticket ticket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion) {
+        historial.add("Se editó ticket " + ticket.getId() +
+                      " → nueva descripción: \"" + nuevaDescripcion + "\", estado: " + nuevoEstado +
+                      ", satisfacción: " + nuevaSatisfaccion);
+    }
+
+    /**
+     * Elimina un ticket por su ID.
+     * @param idTicket identificador del ticket
+     * @return true si se eliminó, false si no existía
+     */
+    public boolean eliminarTicket(String idTicket) {
+        boolean eliminado = tickets.removeIf(t -> t.getId().equals(idTicket));
+        if (eliminado) {
+            historial.add("Se eliminó ticket con ID: " + idTicket);
+        }
+        return eliminado;
     }
 
     /**
@@ -50,12 +77,11 @@ public class Cliente extends Persona {
     }
 
     /**
-     * Elimina un ticket por su ID.
-     * @param idTicket identificador del ticket
-     * @return true si se eliminó, false si no existía
+     * Obtiene el historial de modificaciones del cliente.
+     * @return lista de strings con las acciones realizadas
      */
-    public boolean eliminarTicket(String idTicket) {
-        return tickets.removeIf(t -> t.getId().equals(idTicket));
+    public List<String> getHistorial() {
+        return historial;
     }
 
     @Override
