@@ -88,7 +88,7 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		contentPane.add(lblDesc);
 		
 		comboBox.addItem("Eliga un cliente");
-		comboBox.addItem("Nuevo Cliente");
+		//comboBox.addItem("Nuevo Cliente");
 		
 		comboBox.addActionListener(this);
 
@@ -126,5 +126,9 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 			listener.rellenarCliente((String) comboBox.getSelectedItem());
 		}
 		if (e.getSource() == btnAdd) {listener.NuevoTicket((String) comboBox.getSelectedItem(), "nTicket", textDesc.getText());}
+		if (e.getSource() == btnVolver) {
+	        this.setVisible(false);
+	        listener.AbrirMenuPrincipal();
+	    }
 	}
 }

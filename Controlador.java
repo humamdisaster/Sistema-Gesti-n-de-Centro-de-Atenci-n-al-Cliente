@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Controlador implements AppListener {
 
@@ -7,6 +8,8 @@ public class Controlador implements AppListener {
     private AddTicketGUI menuTickets;
     private VerClientesGUI verClientesGUI;
     private VerTicketsGUI verTicketsGUI;
+    private EditarTicketGUI editarTicketGUI;
+    private EliminarTicketGUI eliminarTicketGUI;
 
     // Sistema
     private SistemaAtencion sistema;
@@ -19,10 +22,16 @@ public class Controlador implements AppListener {
         // Inicializar nuevas ventanas
         verClientesGUI = new VerClientesGUI();
         verClientesGUI.setListener(this);
-
+        
         verTicketsGUI = new VerTicketsGUI();
         verTicketsGUI.setListener(this);
-
+        
+        editarTicketGUI = new EditarTicketGUI();
+        editarTicketGUI.setListener(this);
+        
+        eliminarTicketGUI = new EliminarTicketGUI();
+        eliminarTicketGUI.setListener(this);
+        
         // Conectar vistas al listener
         menuPrincipal.setListener(this);
         menuTickets.setListener(this);
@@ -69,12 +78,38 @@ public class Controlador implements AppListener {
     
     @Override
     public void AbrirEditarTicket() {
-    	// TODO Auto-generated method stub
+        editarTicketGUI.setClientes(sistema.getClientes());
+        editarTicketGUI.setVisible(true);
+        menuPrincipal.setVisible(false);
+    }
+    
+    @Override
+    public void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion) {
+        Ticket t = sistema.buscarTicket(idTicket);
+        if (t != null) {
+            t.setDescripcion(nuevaDescripcion);
+            t.setEstado(nuevoEstado);
+            t.setSatisfaccion(nuevaSatisfaccion);
+            System.out.println("Ticket actualizado desde GUI.");
+        }
     }
     
     @Override
     public void AbrirEliminarTicket() {
-    	// TODO Auto-generated method stub
+        eliminarTicketGUI.limpiarComboClientes();
+        for (Cliente cliente : sistema.getClientes().values()) {
+            eliminarTicketGUI.llenarComboClientes(cliente.getId());
+        }
+        menuPrincipal.setVisible(false);
+        eliminarTicketGUI.setVisible(true);
+    }
+    
+    @Override
+    public void EliminarTicket(String idCliente, String idTicket) {
+        sistema.eliminarTicket(idCliente, idTicket);
+        JOptionPane.showMessageDialog(null, "Ticket eliminado correctamente");
+        eliminarTicketGUI.setVisible(false);
+        menuPrincipal.setVisible(true);
     }
     
     @Override
@@ -102,6 +137,17 @@ public class Controlador implements AppListener {
         for (Cliente cliente : sistema.getClientes().values()) {
             if (cliente.getId().equals(id)) {
                 menuTickets.llenarCliente(cliente.getNombre(), cliente.getEmail());
+            }
+        }
+    }
+    
+    @Override
+    public void rellenarTicketsCliente(String idCliente) {
+        eliminarTicketGUI.limpiarComboTickets();
+        Cliente cliente = sistema.getClientes().get(idCliente);
+        if (cliente != null) {
+            for (Ticket t : cliente.getTickets()) {
+                eliminarTicketGUI.llenarComboTickets(t.getId() + " - " + t.getDescripcion());
             }
         }
     }

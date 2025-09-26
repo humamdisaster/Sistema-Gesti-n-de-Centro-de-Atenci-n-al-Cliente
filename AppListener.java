@@ -20,6 +20,13 @@ public interface AppListener {
 	void llenarComboClientes();
 	void rellenarCliente(String id);
 	
+	// Ventana Editar Ticket
+	void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion);
+	
+	// Ventana Eliminar Ticket
+	void EliminarTicket(String idCliente, String idTicket);
+	void rellenarTicketsCliente(String idCliente);
+	
 	// Genera un reporte al salir del programa
 	void generarReporteYCerrar();
 }
