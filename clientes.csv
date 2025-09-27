@@ -1,5 +1,5 @@
 ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion
-C01,Ana Pérez,ana.perez@mail.com,T01,Problema con facturación,Resuelto,2,10,1
+C01,Ana Pérez,ana.perez@mail.com,T01,Problema con facturación,Resuelto,2,00,10
 C01,Ana Pérez,ana.perez@mail.com,T07,Consulta sobre productos,Resuelto,2,00,0
 C02,Luis Gómez,luis.gomez@mail.com,T02,No puedo iniciar sesión,Resuelto,1,00,0
 C02,Luis Gómez,luis.gomez@mail.com,T03,Consulta sobre contrato,Pendiente,0,00,0

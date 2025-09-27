@@ -1,8 +1,7 @@
 ID Cliente;Nombre;Correo;Tiempo Resolución (h);Acción
 C01;Ana Pérez;ana.perez@mail.com;
-;;;0;Se agregó ticket con ID: T01 y descripción: "Problema con facturación", Tiempo de respuesta: 2.1 (h)
+;;;0;Se agregó ticket con ID: T01 y descripción: "Problema con facturación", Tiempo de respuesta: 2.0 (h)
 ;;;0;Se agregó ticket con ID: T07 y descripción: "Consulta sobre productos", Tiempo de respuesta: 2.0 (h)
-;;;0;Se editó ticket T01 → nueva descripción: "Problema con facturación", estado: Resuelto, satisfacción: 1, Tiempo de respuesta: 2.1 (h)
 
 C02;Luis Gómez;luis.gomez@mail.com;
 ;;;0;Se agregó ticket con ID: T02 y descripción: "No puedo iniciar sesión", Tiempo de respuesta: 1.0 (h)

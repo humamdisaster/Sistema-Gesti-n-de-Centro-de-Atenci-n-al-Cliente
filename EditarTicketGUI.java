@@ -144,31 +144,33 @@ public class EditarTicketGUI extends JFrame {
         String nuevoEstado = (String) comboEstado.getSelectedItem();
         int nuevaSatisfaccion = (Integer) comboSatisfaccion.getSelectedItem();
         
-        double horas = 0.0;
-        
         try {
-            horas = Double.parseDouble(txtHoras.getText());
-            if (horas < 0) {
-                JOptionPane.showMessageDialog(this, 
-                    "El tiempo de resolución no puede ser negativo.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-                return;
+            // Validar descripción
+            if (nuevaDesc.length() > 50) {
+                throw new DescripcionLargaException("La descripción no puede superar los 50 caracteres.");
             }
-            
+
+            // Validar tiempo de respuesta
+            double horas;
+            try {
+                horas = Double.parseDouble(txtHoras.getText());
+            } catch (NumberFormatException e) {
+                throw new TiempoRespuestaInvalidoException("Por favor, ingrese un número válido para las horas.");
+            }
+
+            if (horas < 0) {
+                throw new TiempoRespuestaInvalidoException("El tiempo de resolución no puede ser negativo.");
+            }
+
+            // Actualizar ticket
             listener.editarTicketGUI(idCliente, idTicket, nuevaDesc, nuevoEstado, nuevaSatisfaccion, horas);
             JOptionPane.showMessageDialog(this, "Ticket actualizado correctamente.");
+
             setVisible(false);
             listener.AbrirMenuPrincipal();
-            
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, 
-                "Por favor, ingrese un número válido para las horas.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+
+        } catch (DescripcionLargaException | TiempoRespuestaInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        
-    }
+    } 
 }
