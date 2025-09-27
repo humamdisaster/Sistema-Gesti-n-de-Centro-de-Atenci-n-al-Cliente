@@ -19,7 +19,9 @@ public class SistemaAtencion {
         cargarClientesDesdeCSV("clientes.csv");
     }
 
-    /** Devuelve todos los clientes activos. */
+    /** Devuelve todos los clientes activos.
+     * @return Mapa con ID de cliente como clave y objeto Cliente como valor.
+     */
     public Map<String, Cliente> getClientes() { 
         return clientes; 
     }
@@ -55,7 +57,14 @@ public class SistemaAtencion {
         System.out.println("Cliente agregado con ID: " + idCliente);
     }
 
-    /** Sobrecarga que retorna el ID generado del cliente. */
+    /**
+     * Sobrecarga de agregarCliente, retorna el ID del cliente agregado.
+     * 
+     * @param nombreCliente Nombre del cliente.
+     * @param correoCliente Correo electrónico del cliente.
+     * @param retornarId Boolean para indicar si se retorna el ID.
+     * @return ID del cliente agregado.
+     */
     public String agregarCliente(String nombreCliente, String correoCliente, boolean retornarId) {
         String idCliente = generarIdCliente();
         Cliente nuevoCliente = new Cliente(idCliente, nombreCliente, correoCliente);
@@ -129,7 +138,17 @@ public class SistemaAtencion {
     }
 
     // ------------------ EDITAR Y ELIMINAR ------------------
-
+    
+    /**
+     * Edita un ticket existente de un cliente.
+     * 
+     * @param idCliente ID del cliente.
+     * @param idTicket ID del ticket.
+     * @param nuevaDescripcion Nueva descripción del ticket.
+     * @param nuevoEstado Nuevo estado del ticket.
+     * @param nuevoTiempo Nuevo tiempo de respuesta en horas.
+     * @param nuevaSatisfaccion Nueva satisfacción del cliente.
+     */
     public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado,
                              double nuevoTiempo, int nuevaSatisfaccion) {
         Cliente cliente = clientes.get(idCliente);
@@ -148,7 +167,13 @@ public class SistemaAtencion {
             System.out.println("Cliente no encontrado.");
         }
     }
-
+    
+    /**
+     * Elimina un ticket de un cliente.
+     * 
+     * @param idCliente ID del cliente.
+     * @param idTicket ID del ticket a eliminar.
+     */
     public void eliminarTicket(String idCliente, String idTicket) {
         Cliente cliente = clientes.get(idCliente);
         if (cliente != null) {
@@ -161,7 +186,12 @@ public class SistemaAtencion {
             System.out.println("Cliente no encontrado.");
         }
     }
-
+    
+    /**
+     * Filtra tickets por estado y los muestra por consola.
+     * 
+     * @param estado Estado de los tickets a filtrar (ej. "Pendiente" o "Resuelto").
+     */
     public void filtrarTicketsPorEstado(String estado) {
         System.out.println("\nTickets con estado: " + estado);
         for (Cliente cliente : clientes.values()) {
@@ -172,7 +202,12 @@ public class SistemaAtencion {
             }
         }
     }
-
+    
+    /**
+     * Filtra tickets por tiempo de respuesta exacto y los muestra por consola.
+     * 
+     * @param limiteHoras Tiempo de respuesta en horas.
+     */
     public void filtrarTicketsPorTiempo(double limiteHoras) {
         System.out.println("\nTickets con tiempo de respuesta " + limiteHoras + "h");
         for (Cliente cliente : clientes.values()) {
@@ -183,7 +218,12 @@ public class SistemaAtencion {
             }
         }
     }
-
+    
+    /**
+     * Elimina un cliente del sistema, moviéndolo a clientes eliminados.
+     * 
+     * @param idCliente ID del cliente a eliminar.
+     */
     public void eliminarCliente(String idCliente) {
         Cliente clienteEliminado = clientes.get(idCliente);
         if (clienteEliminado != null) {
@@ -197,7 +237,13 @@ public class SistemaAtencion {
     }
 
     // ------------------ BÚSQUEDAS ------------------
-
+    
+    /**
+     * Busca un cliente por ID o nombre.
+     * 
+     * @param criterioBusqueda ID o nombre del cliente.
+     * @return Cliente encontrado, o null si no existe.
+     */
     public Cliente buscarCliente(String criterioBusqueda) {
         if (clientes.containsKey(criterioBusqueda)) return clientes.get(criterioBusqueda);
         for (Cliente cliente : clientes.values()) {
@@ -215,7 +261,12 @@ public class SistemaAtencion {
     }
 
     // ------------------ GUARDADO Y REPORTE ------------------
-
+    
+    /**
+     * Guarda los cambios en un archivo CSV.
+     * 
+     * @param nombreArchivo Ruta del archivo donde se guardarán los datos.
+     */
     public void guardarCambios(String nombreArchivo) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
             writer.println("ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion");
@@ -238,7 +289,12 @@ public class SistemaAtencion {
             System.out.println("Error al guardar cambios: " + e.getMessage());
         }
     }
-
+    
+    /**
+     * Genera un reporte en un archivo de texto con la información de clientes y tickets.
+     * 
+     * @param nombreArchivo Ruta del archivo de reporte.
+     */
     public void generarReporte(String nombreArchivo) {
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
             writer.append("ID Cliente;Nombre;Correo;Tiempo Resolución (h);Acción\n");

@@ -43,12 +43,16 @@ public class VerTicketsGUI extends JFrame {
         });
     }
 
-    /** Setter para asignar el listener. */
+    /** Setter para asignar el listener. 
+    * @param listener Objeto que implementa AppListener para manejar eventos.
+    */
     public void setListener(AppListener listener) {
         this.listener = listener;
     }
 
-    /** Muestra la lista de tickets por cliente en el área de texto. */
+    /** Muestra la lista de tickets por cliente en el área de texto.
+    * @param clientes Mapa de clientes con ID como clave y objeto Cliente como valor.
+    */
     public void mostrarTickets(Map<String, Cliente> clientes) {
         areaTickets.setText("");
         for (Cliente cliente : clientes.values()) {

@@ -101,7 +101,9 @@ public class EliminarTicketGUI extends JFrame {
         this.listener = l;
     }
 
-    /** Agrega un cliente al combo de clientes. */
+    /** Agrega un cliente al combo de clientes.
+    * @param idCliente ID del cliente a agregar al comboBox.
+    */
     public void llenarComboClientes(String idCliente) {
         comboClientes.addItem(idCliente);
     }
@@ -111,7 +113,9 @@ public class EliminarTicketGUI extends JFrame {
         comboClientes.removeAllItems();
     }
 
-    /** Agrega un ticket al combo de tickets. */
+    /** Agrega un ticket al combo de tickets. 
+     *@param idTicket ID del ticket a agregar al comboBox.
+     */
     public void llenarComboTickets(String idTicket) {
         comboTickets.addItem(idTicket);
     }

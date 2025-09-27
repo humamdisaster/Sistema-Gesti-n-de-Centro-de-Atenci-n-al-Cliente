@@ -148,12 +148,16 @@ public class MenuGUI extends JFrame implements ActionListener {
         panelPrincipal.add(btnSalir);
     }
 
-    /** Asigna el AppListener que conecta la GUI con SistemaAtencion. */
+    /** Asigna el AppListener que conecta la GUI con SistemaAtencion. 
+     * @param listener Objeto que implementa AppListener para manejar eventos.
+     */
     public void setListener(AppListener listener) {
         this.listener = listener;
     }
 
-    /** Maneja los eventos de los botones del menú principal. */
+    /** Maneja los eventos de los botones del menú principal. 
+     * @param e Evento generado por un botón.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (listener == null) return;
