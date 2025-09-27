@@ -149,31 +149,50 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		
 		if (e.getSource() == btnAdd) {
 		    String seleccionado = (String) comboBox.getSelectedItem();
-		    
-		    if ("Nuevo Cliente".equals(seleccionado)) {
-		        // Crear cliente y obtener ID
-		        String nuevoId = listener.NuevoCliente(textName.getText(), textMail.getText(), true);
+		    String descripcion = textDesc.getText();
+		    String nombre = textName.getText().trim();
+		    String correo = textMail.getText().trim();
 
-		        // Crear ticket con ID recién creado
-		        listener.NuevoTicket(nuevoId, "nTicket", textDesc.getText());
+		    try {
+		        // Validaciones de la descripción
+		        if (descripcion.isEmpty()) {
+		            throw new DescripcionLargaException("La descripción no puede estar vacía.");
+		        }
+		        if (descripcion.length() > 50) {
+		            throw new DescripcionLargaException("La descripción no puede superar los 50 caracteres.");
+		        }
+		        if (correo.isEmpty()) {
+		        	throw new CorreoInvalidoException("El correo no puede estar vacío");
+		        }
+		        if (listener.correoYaExiste(textMail.getText())) {
+		        	throw new CorreoInvalidoException("El correo ya está registrado");
+		        }
+		        if (nombre.isEmpty()) {
+		        	throw new NombreInvalidoException("El nombre no puede estar vacío");
+		        }
 		        
-		        // Mostrar ventana de confirmación
-		        JOptionPane.showMessageDialog(
-		            this,
-		            "Has agregado al cliente " + nuevoId + " un nuevo Ticket",
-		            "Cliente y Ticket agregado",
-		            JOptionPane.INFORMATION_MESSAGE
-		        );
 
-		        // Volver al menú principal
-		        this.setVisible(false);
-		        listener.AbrirMenuPrincipal();
+		        if ("Nuevo Cliente".equals(seleccionado)) {
+		            // Crear cliente y obtener ID
+		            String nuevoId = listener.NuevoCliente(textName.getText(), textMail.getText(), true);
+		            // Crear ticket con ID recién creado
+		            listener.NuevoTicket(nuevoId, "nTicket", descripcion);
 
-		    } else if (!"Elija un cliente".equals(seleccionado)) {
-		        // Cliente existente
-		        listener.NuevoTicket(seleccionado, "nTicket", textDesc.getText());
-		        
-		        JOptionPane.showMessageDialog(
+		            JOptionPane.showMessageDialog(
+		                this,
+		                "Has agregado al cliente " + nuevoId + " un nuevo Ticket",
+		                "Cliente y Ticket agregado",
+		                JOptionPane.INFORMATION_MESSAGE
+		            );
+
+		            this.setVisible(false);
+		            listener.AbrirMenuPrincipal();
+
+		        } else if (!"Elija un cliente".equals(seleccionado)) {
+		            // Cliente existente
+		            listener.NuevoTicket(seleccionado, "nTicket", descripcion);
+
+		            JOptionPane.showMessageDialog(
 		                this,
 		                "Se ha agregado un nuevo ticket al cliente " + seleccionado,
 		                "Ticket agregado",
@@ -182,7 +201,11 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 
 		            this.setVisible(false);
 		            listener.AbrirMenuPrincipal();
-		       }
+		        }
+
+		    } catch (DescripcionLargaException | CorreoInvalidoException | NombreInvalidoException ex) {
+		        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		    }
 		}
 		
 		if (e.getSource() == btnVolver) {

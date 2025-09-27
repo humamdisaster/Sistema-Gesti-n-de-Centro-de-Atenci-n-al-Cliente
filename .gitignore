@@ -37,3 +37,5 @@
 >>>>>>> branch 'main' of https://github.com/humamdisaster/Sistema-Gesti-n-de-Centro-de-Atenci-n-al-Cliente
 /TiempoRespuestaInvalidoException.class
 /DescripcionLargaException.class
+/CorreoInvalidoException.class
+/NombreInvalidoException.class
