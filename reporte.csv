@@ -1,58 +1,58 @@
 ID Cliente;Nombre;Correo;Tiempo Resolución (h);Acción
 C01;Ana Pérez;ana.perez@mail.com;
-;;;0;Se agregó ticket con ID: T01 y descripción: "Problema con facturación", Tiempo de respuesta: 2 (h)
-;;;0;Se agregó ticket con ID: T07 y descripción: "Consulta sobre productos", Tiempo de respuesta: 2 (h)
-;;;0;Se editó ticket T01 → nueva descripción: "Problema con facturación", estado: Resuelto, satisfacción: 3, Tiempo de respuesta: 2 (h)
+;;;0;Se agregó ticket con ID: T01 y descripción: "Problema con facturación", Tiempo de respuesta: 2.1 (h)
+;;;0;Se agregó ticket con ID: T07 y descripción: "Consulta sobre productos", Tiempo de respuesta: 2.0 (h)
+;;;0;Se editó ticket T01 → nueva descripción: "Problema con facturación", estado: Resuelto, satisfacción: 1, Tiempo de respuesta: 2.1 (h)
 
 C02;Luis Gómez;luis.gomez@mail.com;
-;;;0;Se agregó ticket con ID: T02 y descripción: "No puedo iniciar sesión", Tiempo de respuesta: 1 (h)
-;;;0;Se agregó ticket con ID: T03 y descripción: "Consulta sobre contrato", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T02 y descripción: "No puedo iniciar sesión", Tiempo de respuesta: 1.0 (h)
+;;;0;Se agregó ticket con ID: T03 y descripción: "Consulta sobre contrato", Tiempo de respuesta: 0.0 (h)
 
 C03;Carla Díaz;carla.diaz@mail.com;
-;;;0;Se agregó ticket con ID: T04 y descripción: "Falla en el sistema", Tiempo de respuesta: 4 (h)
+;;;0;Se agregó ticket con ID: T04 y descripción: "Falla en el sistema", Tiempo de respuesta: 4.0 (h)
 
 C04;Pedro Fernández;pedro.fernandez@mail.com;
-;;;0;Se agregó ticket con ID: T05 y descripción: "Error en la aplicación", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T05 y descripción: "Ya funciona", Tiempo de respuesta: 3.0 (h)
 
 C05;Sofía Martínez;sofia.martinez@mail.com;
-;;;0;Se agregó ticket con ID: T06 y descripción: "Duda sobre pagos", Tiempo de respuesta: 3 (h)
+;;;0;Se agregó ticket con ID: T06 y descripción: "Duda sobre pagos", Tiempo de respuesta: 3.0 (h)
 
 C06;Diego Torres;diego.torres@mail.com;
-;;;0;Se agregó ticket con ID: T08 y descripción: "Problema de instalación", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T08 y descripción: "Problema de instalación", Tiempo de respuesta: 0.0 (h)
 
 C07;María López;maria.lopez@mail.com;
-;;;0;Se agregó ticket con ID: T09 y descripción: "Falla en actualización", Tiempo de respuesta: 2 (h)
+;;;0;Se agregó ticket con ID: T09 y descripción: "Falla en actualización", Tiempo de respuesta: 2.0 (h)
 
 C08;Ricardo Sánchez;ricardo.sanchez@mail.com;
-;;;0;Se agregó ticket con ID: T10 y descripción: "No llega correo de confirmación", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T10 y descripción: "No llega correo de confirmación", Tiempo de respuesta: 0.0 (h)
 
 C09;Valentina Rojas;valentina.rojas@mail.com;
-;;;0;Se agregó ticket con ID: T11 y descripción: "Consulta de garantía", Tiempo de respuesta: 3 (h)
+;;;0;Se agregó ticket con ID: T11 y descripción: "Consulta de garantía", Tiempo de respuesta: 3.0 (h)
 
 C10;Jorge Medina;jorge.medina@mail.com;
-;;;0;Se agregó ticket con ID: T12 y descripción: "Error al registrar ticket", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T12 y descripción: "Error al registrar ticket", Tiempo de respuesta: 0.0 (h)
 
 C11;Camila Fuentes;camila.fuentes@mail.com;
-;;;0;Se agregó ticket con ID: T13 y descripción: "Duda sobre facturación", Tiempo de respuesta: 2 (h)
+;;;0;Se agregó ticket con ID: T13 y descripción: "Duda sobre facturación", Tiempo de respuesta: 2.0 (h)
 
 C12;Andrés Paredes;andres.paredes@mail.com;
-;;;0;Se agregó ticket con ID: T14 y descripción: "Problema con contraseña", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T14 y descripción: "Problema con contraseña", Tiempo de respuesta: 0.0 (h)
 
 C13;Fernanda Silva;fernanda.silva@mail.com;
-;;;0;Se agregó ticket con ID: T15 y descripción: "Consulta de producto", Tiempo de respuesta: 1 (h)
+;;;0;Se agregó ticket con ID: T15 y descripción: "Consulta de producto", Tiempo de respuesta: 1.0 (h)
 
 C14;Nicolás Castillo;nicolas.castillo@mail.com;
-;;;0;Se agregó ticket con ID: T16 y descripción: "Error en notificaciones", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T16 y descripción: "Error en notificaciones", Tiempo de respuesta: 0.0 (h)
 
 C15;Isabel Vega;isabel.vega@mail.com;
-;;;0;Se agregó ticket con ID: T17 y descripción: "No puedo descargar reporte", Tiempo de respuesta: 3 (h)
+;;;0;Se agregó ticket con ID: T17 y descripción: "No puedo descargar reporte", Tiempo de respuesta: 3.0 (h)
 
 C16;Ramón López;ramon.lopez@mail.com;
-;;;0;Se agregó ticket con ID: T18 y descripción: "Consulta sobre suscripción", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T18 y descripción: "Consulta sobre suscripción", Tiempo de respuesta: 0.0 (h)
 
 C17;Patricia Moreno;patricia.moreno@mail.com;
-;;;0;Se agregó ticket con ID: T19 y descripción: "Falla en el sistema", Tiempo de respuesta: 4 (h)
+;;;0;Se agregó ticket con ID: T19 y descripción: "Falla en el sistema", Tiempo de respuesta: 4.0 (h)
 
 C18;Daniela Castro;daniela.castro@mail.com;
-;;;0;Se agregó ticket con ID: T20 y descripción: "Problema al pagar factura", Tiempo de respuesta: 0 (h)
+;;;0;Se agregó ticket con ID: T20 y descripción: "Problema al pagar factura", Tiempo de respuesta: 0.0 (h)
 

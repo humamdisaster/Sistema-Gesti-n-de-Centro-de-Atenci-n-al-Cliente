@@ -103,7 +103,7 @@ public class SistemaAtencion {
     }
     
     // --- Editar y eliminar ---
-    public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevoTiempo, int nuevaSatisfaccion) {
+    public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, double nuevoTiempo, int nuevaSatisfaccion) {
         Cliente cliente = clientes.get(idCliente);
         if (cliente != null) {
             Ticket ticket = cliente.buscarTicket(idTicket);
@@ -137,11 +137,11 @@ public class SistemaAtencion {
         }
     }
     
-    public void filtrarTicketsPorTiempo(int limiteHoras) {
+    public void filtrarTicketsPorTiempo(double limiteHoras) {
         System.out.println("\nTickets con tiempo de respuesta " + limiteHoras + "h");
         for (Cliente cliente : clientes.values()) {
             for (Ticket ticket : cliente.getTickets()) {
-                if (ticket.getTiempoRespuesta() == limiteHoras) {
+                if (Math.abs(ticket.getTiempoRespuesta() - limiteHoras) < 0.001) {
                     System.out.println(cliente.getNombre() + " -> " + ticket.resumen(true));
                 }
             }
@@ -181,7 +181,7 @@ public class SistemaAtencion {
             
             for (Cliente cliente : clientes.values()) {
                 for (Ticket ticket : cliente.getTickets()) {
-                    writer.printf("%s,%s,%s,%s,%s,%s,%d,%d%n",
+                    writer.printf("%s,%s,%s,%s,%s,%s,%.2f,%d%n",
                             cliente.getId(),
                             cliente.getNombre(),
                             cliente.getEmail(),
@@ -259,7 +259,7 @@ public class SistemaAtencion {
                 String idTicket = partes[3].trim();
                 String descripcion = partes[4].trim();
                 String estado = partes[5].trim();
-                int tiempo = partes[6].isEmpty() ? 0 : Integer.parseInt(partes[6]);
+                double tiempo = partes[6].isEmpty() ? 0 : Double.parseDouble(partes[6]);
                 int satisfaccion = partes[7].isEmpty() ? 0 : Integer.parseInt(partes[7]);
                 
                 // Actualizar contadores

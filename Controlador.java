@@ -90,7 +90,7 @@ public class Controlador implements AppListener {
     }
     
     @Override
-    public void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, int horasResolucion) {
+    public void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, double horasResolucion) {
     	Ticket t = sistema.buscarTicket(idTicket);
         if (t != null) {
             t.setDescripcion(nuevaDescripcion);

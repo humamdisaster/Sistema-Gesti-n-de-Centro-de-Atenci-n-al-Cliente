@@ -131,7 +131,7 @@ public class EditarTicketGUI extends JFrame {
             txtHoras.setText(String.valueOf(ticket.getTiempoRespuesta()));
         }
     }
-
+    
     private void guardarCambios() {
         String clienteSeleccionado = (String) comboClientes.getSelectedItem();
         String ticketSeleccionado = (String) comboTickets.getSelectedItem();
@@ -143,11 +143,32 @@ public class EditarTicketGUI extends JFrame {
         String nuevaDesc = txtDescripcion.getText();
         String nuevoEstado = (String) comboEstado.getSelectedItem();
         int nuevaSatisfaccion = (Integer) comboSatisfaccion.getSelectedItem();
-        int horas = Integer.parseInt(txtHoras.getText());
-
-        listener.editarTicketGUI(idCliente, idTicket, nuevaDesc, nuevoEstado, nuevaSatisfaccion, horas);
-        JOptionPane.showMessageDialog(this, "Ticket actualizado correctamente.");
-        setVisible(false);
-        listener.AbrirMenuPrincipal();
+        
+        double horas = 0.0;
+        
+        try {
+            horas = Double.parseDouble(txtHoras.getText());
+            if (horas < 0) {
+                JOptionPane.showMessageDialog(this, 
+                    "El tiempo de resolución no puede ser negativo.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            listener.editarTicketGUI(idCliente, idTicket, nuevaDesc, nuevoEstado, nuevaSatisfaccion, horas);
+            JOptionPane.showMessageDialog(this, "Ticket actualizado correctamente.");
+            setVisible(false);
+            listener.AbrirMenuPrincipal();
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, ingrese un número válido para las horas.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
     }
 }

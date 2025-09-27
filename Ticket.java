@@ -6,7 +6,7 @@ public class Ticket {
     private String id;
     private String descripcion;
     private String estado;
-    private int tiempoRespuesta; // en horas
+    private double tiempoRespuesta; // en horas
     private int satisfaccion;
 
     /**
@@ -18,7 +18,7 @@ public class Ticket {
         this.id = id;
         this.descripcion = descripcion;
         this.estado = "Pendiente";
-        this.tiempoRespuesta = 0;
+        this.tiempoRespuesta = 0.0;
         this.satisfaccion = 0;
     }
 
@@ -32,8 +32,8 @@ public class Ticket {
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
 
-    public int getTiempoRespuesta() { return tiempoRespuesta; }
-    public void setTiempoRespuesta(int tiempoRespuesta) { this.tiempoRespuesta = tiempoRespuesta; }
+    public double getTiempoRespuesta() { return tiempoRespuesta; }
+    public void setTiempoRespuesta(double tiempoRespuesta) { this.tiempoRespuesta = tiempoRespuesta; }
     
     public int getSatisfaccion() { return satisfaccion; }
     public void setSatisfaccion(int satisfaccion) { this.satisfaccion = satisfaccion; }
@@ -44,7 +44,7 @@ public class Ticket {
      */
     @Override
     public String toString() {
-        return "[" + id + "] " + descripcion + " - Estado: " + estado + " | Tiempo resp: " + tiempoRespuesta + "h" + " Satisfacción del Cliente: " + satisfaccion;
+        return "[" + id + "] " + descripcion + " - Estado: " + estado + " | Tiempo resp: " + String.format("%.1f", tiempoRespuesta) + "h" + " Satisfacción del Cliente: " + satisfaccion;
     }
 
     /**

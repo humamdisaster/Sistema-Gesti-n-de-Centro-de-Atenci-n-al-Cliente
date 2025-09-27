@@ -84,7 +84,7 @@ public class Main {
                     System.out.print("Nuevo estado: ");
                     String estadoEditado = sc.nextLine();
                     System.out.print("Nuevo tiempo de respuesta (h): ");
-                    int tiempoEditado = sc.nextInt();
+                    double tiempoEditado = sc.nextDouble();
                     sc.nextLine();
                     System.out.print("Nivel de satisfacción (1-5): ");
                     int satisfaccionEditada = sc.nextInt();
@@ -111,7 +111,7 @@ public class Main {
                 case 7:
                     // Filtrar tickets según un tiempo de respuesta específico
                     System.out.print("Ingrese horas a filtrar: ");
-                    int limiteHoras = sc.nextInt();
+                    double limiteHoras = sc.nextDouble();
                     sc.nextLine();
                     sistema.filtrarTicketsPorTiempo(limiteHoras);
                     break;
