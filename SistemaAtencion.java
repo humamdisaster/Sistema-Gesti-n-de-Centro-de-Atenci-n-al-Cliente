@@ -54,11 +54,19 @@ public class SistemaAtencion {
         System.out.println("Cliente agregado con ID: " + idCliente);
     }
     
+ // Sobrecarga: retorna el ID
+    public String agregarCliente(String nombreCliente, String correoCliente, boolean retornarId) {
+        String idCliente = generarIdCliente();
+        Cliente nuevoCliente = new Cliente(idCliente, nombreCliente, correoCliente);
+        clientes.put(idCliente, nuevoCliente);
+        System.out.println("Cliente agregado con ID: " + idCliente);
+        return idCliente;
+    }
+    
     /**
      * Agrega un nuevo ticket a un cliente existente, con ID generado automáticamente.
      * @param idCliente ID del cliente
      * @param descripcionTicket descripción del ticket
-     * throws ClienteNoExisteException
      */
     public void agregarTicket(String idCliente, String descripcionTicket) {
         Cliente cliente = clientes.get(idCliente);
@@ -228,7 +236,7 @@ public class SistemaAtencion {
                             ticket.getSatisfaccion());
                 }
             }
-            System.out.println("Cabios guardados correctamente en " + nombreArchivo);
+            System.out.println("Cambios guardados correctamente en " + nombreArchivo);
         } catch (IOException e) {
             System.out.println("Error al generar el reporte: " + e.getMessage());
         }

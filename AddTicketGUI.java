@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 
 public class AddTicketGUI extends JFrame implements ActionListener {
 
@@ -87,8 +89,8 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		lblDesc.setBounds(23, 151, 125, 14);
 		contentPane.add(lblDesc);
 		
-		comboBox.addItem("Eliga un cliente");
-		//comboBox.addItem("Nuevo Cliente");
+		comboBox.addItem("Elija un cliente");
+		comboBox.addItem("Nuevo Cliente");
 		
 		comboBox.addActionListener(this);
 
@@ -114,21 +116,74 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		textMail.setText(mail);
 	}
 	
+	public void resetGUI() {
+		if (!inComboBox("Elija un cliente")) {
+	        comboBox.insertItemAt("Elija un cliente", 0);
+	    }
+		comboBox.setSelectedItem("Elija un cliente"); // opción por defecto
+        textName.setText("");
+        textMail.setText("");
+        textDesc.setText("");
+    }
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == comboBox) {
-			if (comboBox.getSelectedItem() != "Elija un cliente") {comboBox.removeItem("Elija un cliente");}
-			if (comboBox.getSelectedItem() == "Nuevo Cliente") {
-				textName.setText("");
-				textMail.setText("");
-			}
-			listener.rellenarCliente((String) comboBox.getSelectedItem());
+		    if (!"Elija un cliente".equals(comboBox.getSelectedItem())) {
+		        comboBox.removeItem("Elija un cliente");
+		    }
+		    
+		    if ("Nuevo Cliente".equals(comboBox.getSelectedItem())) {
+		        textName.setText("");
+		        textMail.setText("");
+		    } else {
+		        // Cliente existente → rellenar campos
+		        listener.rellenarCliente((String) comboBox.getSelectedItem());
+		    }
 		}
-		if (e.getSource() == btnAdd) {listener.NuevoTicket((String) comboBox.getSelectedItem(), "nTicket", textDesc.getText());}
+		
+		if (e.getSource() == btnAdd) {
+		    String seleccionado = (String) comboBox.getSelectedItem();
+		    
+		    if ("Nuevo Cliente".equals(seleccionado)) {
+		        // Crear cliente y obtener ID
+		        String nuevoId = listener.NuevoCliente(textName.getText(), textMail.getText(), true);
+
+		        // Crear ticket con ID recién creado
+		        listener.NuevoTicket(nuevoId, "nTicket", textDesc.getText());
+		        
+		        // Mostrar ventana de confirmación
+		        JOptionPane.showMessageDialog(
+		            this,
+		            "Has agregado al cliente " + nuevoId + " un nuevo Ticket",
+		            "Cliente y Ticket agregado",
+		            JOptionPane.INFORMATION_MESSAGE
+		        );
+
+		        // Volver al menú principal
+		        this.setVisible(false);
+		        listener.AbrirMenuPrincipal();
+
+		    } else if (!"Elija un cliente".equals(seleccionado)) {
+		        // Cliente existente
+		        listener.NuevoTicket(seleccionado, "nTicket", textDesc.getText());
+		        
+		        JOptionPane.showMessageDialog(
+		                this,
+		                "Se ha agregado un nuevo ticket al cliente " + seleccionado,
+		                "Ticket agregado",
+		                JOptionPane.INFORMATION_MESSAGE
+		            );
+
+		            this.setVisible(false);
+		            listener.AbrirMenuPrincipal();
+		       }
+		}
+		
 		if (e.getSource() == btnVolver) {
-	        this.setVisible(false);
-	        listener.AbrirMenuPrincipal();
-	    }
+		    this.setVisible(false);
+		    listener.AbrirMenuPrincipal();
+		}
 	}
 }

@@ -10,6 +10,7 @@ public class Controlador implements AppListener {
     private VerTicketsGUI verTicketsGUI;
     private EditarTicketGUI editarTicketGUI;
     private EliminarTicketGUI eliminarTicketGUI;
+    private BuscarTicketGUI buscarTicketGUI;
 
     // Sistema
     private SistemaAtencion sistema;
@@ -31,6 +32,9 @@ public class Controlador implements AppListener {
         
         eliminarTicketGUI = new EliminarTicketGUI();
         eliminarTicketGUI.setListener(this);
+        
+        buscarTicketGUI = new BuscarTicketGUI();
+        buscarTicketGUI.setListener(this);
         
         // Conectar vistas al listener
         menuPrincipal.setListener(this);
@@ -73,6 +77,7 @@ public class Controlador implements AppListener {
     @Override
     public void AbrirAddTicket() {
         menuPrincipal.setVisible(false);
+        menuTickets.resetGUI();
         menuTickets.setVisible(true);
     }
     
@@ -84,12 +89,13 @@ public class Controlador implements AppListener {
     }
     
     @Override
-    public void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion) {
-        Ticket t = sistema.buscarTicket(idTicket);
+    public void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, int horasResolucion) {
+    	Ticket t = sistema.buscarTicket(idTicket);
         if (t != null) {
             t.setDescripcion(nuevaDescripcion);
             t.setEstado(nuevoEstado);
             t.setSatisfaccion(nuevaSatisfaccion);
+            t.setTiempoRespuesta(horasResolucion);
 
             Cliente cliente = sistema.getClientes().get(idCliente);
             if (cliente != null) {
@@ -119,6 +125,21 @@ public class Controlador implements AppListener {
     }
     
     @Override
+    public void AbrirBuscarTicket() {
+        buscarTicketGUI.setClientes(sistema.getClientes());
+        buscarTicketGUI.setVisible(true);
+        menuPrincipal.setVisible(false);
+    }
+    
+    @Override
+    public void AbrirBuscarCliente() {
+        BuscarClienteGUI gui = new BuscarClienteGUI();
+        gui.setListener(this);
+        gui.setClientes(sistema.getClientes());
+        gui.setVisible(true);
+    }
+    
+    @Override
     public void AbrirFiltrEstado() {
     	// TODO Auto-generated method stub
     }
@@ -145,6 +166,13 @@ public class Controlador implements AppListener {
                 menuTickets.llenarCliente(cliente.getNombre(), cliente.getEmail());
             }
         }
+    }
+    
+    @Override
+    public String NuevoCliente(String nombre, String correo, boolean retornarId) {
+        // Llamar a la sobrecarga de SistemaAtencion
+        String id = sistema.agregarCliente(nombre, correo, retornarId); // usa la sobrecarga
+        return id;
     }
     
     @Override

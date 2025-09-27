@@ -10,6 +10,7 @@ public class EditarTicketGUI extends JFrame {
     private JTextArea txtDescripcion;
     private JComboBox<String> comboEstado;
     private JComboBox<Integer> comboSatisfaccion;
+    private JTextField txtHoras;
     private JButton btnGuardar, btnVolver;
     private AppListener listener;
     private Map<String, Cliente> clientes;
@@ -17,7 +18,7 @@ public class EditarTicketGUI extends JFrame {
     public EditarTicketGUI() {
         setTitle("Editar Ticket");
         setResizable(false);
-        setBounds(100, 100, 450, 350);
+        setBounds(100, 100, 450, 400);
         contentPane = new JPanel();
         contentPane.setLayout(null);
         setContentPane(contentPane);
@@ -64,15 +65,24 @@ public class EditarTicketGUI extends JFrame {
         comboSatisfaccion = new JComboBox<>(new Integer[]{1,2,3,4,5});
         comboSatisfaccion.setBounds(130, 180, 60, 25);
         contentPane.add(comboSatisfaccion);
+        
+        //Horas de resolución
+        JLabel lblHoras = new JLabel("Tiempo de resolución (h):");
+        lblHoras.setBounds(30, 220, 160, 25);
+        contentPane.add(lblHoras);
+
+        txtHoras = new JTextField();
+        txtHoras.setBounds(200, 220, 60, 25);
+        contentPane.add(txtHoras);
 
         // Botones
         btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(100, 250, 100, 30);
+        btnGuardar.setBounds(100, 280, 100, 30);
         contentPane.add(btnGuardar);
         btnGuardar.addActionListener(e -> guardarCambios());
 
-        btnVolver = new JButton("Volver");
-        btnVolver.setBounds(220, 250, 100, 30);
+        btnVolver = new JButton("Atrás");
+        btnVolver.setBounds(220, 280, 100, 30);
         contentPane.add(btnVolver);
         btnVolver.addActionListener(e -> {
             setVisible(false);
@@ -119,6 +129,7 @@ public class EditarTicketGUI extends JFrame {
             txtDescripcion.setText(ticket.getDescripcion());
             comboEstado.setSelectedItem(ticket.getEstado());
             comboSatisfaccion.setSelectedItem(ticket.getSatisfaccion());
+            txtHoras.setText(String.valueOf(ticket.getTiempoRespuesta()));
         }
     }
 
@@ -133,8 +144,9 @@ public class EditarTicketGUI extends JFrame {
         String nuevaDesc = txtDescripcion.getText();
         String nuevoEstado = (String) comboEstado.getSelectedItem();
         int nuevaSatisfaccion = (Integer) comboSatisfaccion.getSelectedItem();
+        int horas = Integer.parseInt(txtHoras.getText());
 
-        listener.editarTicketGUI(idCliente, idTicket, nuevaDesc, nuevoEstado, nuevaSatisfaccion);
+        listener.editarTicketGUI(idCliente, idTicket, nuevaDesc, nuevoEstado, nuevaSatisfaccion, horas);
         JOptionPane.showMessageDialog(this, "Ticket actualizado correctamente.");
         setVisible(false);
         listener.AbrirMenuPrincipal();

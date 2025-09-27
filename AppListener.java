@@ -10,6 +10,8 @@ public interface AppListener {
 	void AbrirEliminarTicket();
 	void AbrirFiltrEstado();
 	void AbrirFiltTiempo();
+	void AbrirBuscarTicket();
+	void AbrirBuscarCliente();
 	
 	// Ventana Mostrar Clientes
 	void mostrarClientesGUI();
@@ -17,11 +19,12 @@ public interface AppListener {
 	
 	// Ventana Agregar Tickets
 	void NuevoTicket(String idCliente, String idTicket, String desc);
+	String NuevoCliente(String nombre, String correo, boolean retornarId);
 	void llenarComboClientes();
 	void rellenarCliente(String id);
 	
 	// Ventana Editar Ticket
-	void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion);
+	void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, int horasResolucion);
 	
 	// Ventana Eliminar Ticket
 	void EliminarTicket(String idCliente, String idTicket);
