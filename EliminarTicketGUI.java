@@ -1,71 +1,89 @@
 import javax.swing.*;
 
+/**
+ * Ventana para eliminar tickets de clientes.
+ * Permite seleccionar un cliente, ver sus tickets y eliminar el ticket seleccionado.
+ */
 public class EliminarTicketGUI extends JFrame {
+
     private static final long serialVersionUID = 1L;
 
-    private JPanel contentPane;
-    private JComboBox<String> comboClientes;
-    private JComboBox<String> comboTickets;
-    private JButton btnEliminar, btnVolver;
-    private AppListener listener;
+    private JPanel panelPrincipal;             // Panel contenedor de la ventana
+    private JComboBox<String> comboClientes;   // Combo para seleccionar cliente
+    private JComboBox<String> comboTickets;    // Combo para seleccionar ticket del cliente
+    private JButton btnEliminar;               // Botón para eliminar ticket seleccionado
+    private JButton btnVolver;                 // Botón para volver al menú principal
+    private AppListener listener;              // Listener que conecta la GUI con SistemaAtencion
 
+    /**
+     * Constructor que inicializa la ventana de eliminación de tickets.
+     */
     public EliminarTicketGUI() {
         setTitle("Eliminar Ticket");
         setResizable(false);
         setSize(500, 250);
         setLocationRelativeTo(null);
-        contentPane = new JPanel();
-        contentPane.setLayout(null);
-        setContentPane(contentPane);
 
-        JLabel lblCliente = new JLabel("Seleccione Cliente:");
-        lblCliente.setBounds(30, 30, 150, 25);
-        contentPane.add(lblCliente);
+        panelPrincipal = new JPanel();
+        panelPrincipal.setLayout(null);
+        setContentPane(panelPrincipal);
+
+        // Etiqueta y combo de clientes
+        JLabel labelCliente = new JLabel("Seleccione Cliente:");
+        labelCliente.setBounds(30, 30, 150, 25);
+        panelPrincipal.add(labelCliente);
 
         comboClientes = new JComboBox<>();
         comboClientes.setBounds(200, 30, 250, 25);
-        contentPane.add(comboClientes);
+        panelPrincipal.add(comboClientes);
 
-        JLabel lblTicket = new JLabel("Seleccione Ticket:");
-        lblTicket.setBounds(30, 80, 150, 25);
-        contentPane.add(lblTicket);
+        // Etiqueta y combo de tickets
+        JLabel labelTicket = new JLabel("Seleccione Ticket:");
+        labelTicket.setBounds(30, 80, 150, 25);
+        panelPrincipal.add(labelTicket);
 
         comboTickets = new JComboBox<>();
         comboTickets.setBounds(200, 80, 250, 25);
-        contentPane.add(comboTickets);
+        panelPrincipal.add(comboTickets);
 
+        // Botones
         btnEliminar = new JButton("Eliminar Ticket");
         btnEliminar.setBounds(80, 150, 150, 30);
-        contentPane.add(btnEliminar);
+        panelPrincipal.add(btnEliminar);
 
         btnVolver = new JButton("Volver");
         btnVolver.setBounds(260, 150, 150, 30);
-        contentPane.add(btnVolver);
+        panelPrincipal.add(btnVolver);
 
         // --- Eventos ---
+
+        // Al seleccionar un cliente, rellena el combo de tickets correspondientes
         comboClientes.addActionListener(e -> {
             if (listener != null) {
-                String idCliente = (String) comboClientes.getSelectedItem();
-                if (idCliente != null) {
-                    listener.rellenarTicketsCliente(idCliente); 
+                String idClienteSeleccionado = (String) comboClientes.getSelectedItem();
+                if (idClienteSeleccionado != null) {
+                    listener.rellenarTicketsCliente(idClienteSeleccionado);
                 }
             }
         });
 
+        // Al presionar eliminar, elimina el ticket seleccionado en SistemaAtencion
         btnEliminar.addActionListener(e -> {
             if (listener != null) {
-                String idCliente = (String) comboClientes.getSelectedItem();
+                String idClienteSeleccionado = (String) comboClientes.getSelectedItem();
                 String ticketSeleccionado = (String) comboTickets.getSelectedItem();
-                if (idCliente != null && ticketSeleccionado != null) {
+                if (idClienteSeleccionado != null && ticketSeleccionado != null) {
                     // Extraer solo el ID antes del " - "
                     String idTicket = ticketSeleccionado.split(" - ")[0].trim();
-                    listener.EliminarTicket(idCliente, idTicket);
-                    // Actualizar comboTickets después de eliminar
-                    listener.rellenarTicketsCliente(idCliente);
+                    listener.EliminarTicket(idClienteSeleccionado, idTicket);
+
+                    // Actualiza comboTickets después de eliminar
+                    listener.rellenarTicketsCliente(idClienteSeleccionado);
                 }
             }
         });
 
+        // Al presionar volver, cierra la ventana y abre menú principal
         btnVolver.addActionListener(e -> {
             setVisible(false);
             if (listener != null) {
@@ -74,22 +92,31 @@ public class EliminarTicketGUI extends JFrame {
         });
     }
 
+    /**
+     * Asigna el AppListener que conecta la GUI con SistemaAtencion.
+     *
+     * @param l Listener que maneja eventos y operaciones sobre SistemaAtencion
+     */
     public void setListener(AppListener l) {
         this.listener = l;
     }
 
+    /** Agrega un cliente al combo de clientes. */
     public void llenarComboClientes(String idCliente) {
         comboClientes.addItem(idCliente);
     }
 
+    /** Limpia todos los clientes del combo. */
     public void limpiarComboClientes() {
         comboClientes.removeAllItems();
     }
 
+    /** Agrega un ticket al combo de tickets. */
     public void llenarComboTickets(String idTicket) {
         comboTickets.addItem(idTicket);
     }
 
+    /** Limpia todos los tickets del combo. */
     public void limpiarComboTickets() {
         comboTickets.removeAllItems();
     }
