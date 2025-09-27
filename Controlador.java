@@ -10,6 +10,7 @@ public class Controlador implements AppListener {
     private VerTicketsGUI verTicketsGUI;
     private EditarTicketGUI editarTicketGUI;
     private EliminarTicketGUI eliminarTicketGUI;
+    private BuscarTicketGUI buscarTicketGUI;
 
     // Sistema
     private SistemaAtencion sistema;
@@ -31,6 +32,9 @@ public class Controlador implements AppListener {
         
         eliminarTicketGUI = new EliminarTicketGUI();
         eliminarTicketGUI.setListener(this);
+        
+        buscarTicketGUI = new BuscarTicketGUI();
+        buscarTicketGUI.setListener(this);
         
         // Conectar vistas al listener
         menuPrincipal.setListener(this);
@@ -117,6 +121,13 @@ public class Controlador implements AppListener {
         JOptionPane.showMessageDialog(null, "Ticket eliminado correctamente");
         eliminarTicketGUI.setVisible(false);
         menuPrincipal.setVisible(true);
+    }
+    
+    @Override
+    public void AbrirBuscarTicket() {
+        buscarTicketGUI.setClientes(sistema.getClientes());
+        buscarTicketGUI.setVisible(true);
+        menuPrincipal.setVisible(false);
     }
     
     @Override

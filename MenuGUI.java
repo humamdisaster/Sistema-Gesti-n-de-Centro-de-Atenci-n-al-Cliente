@@ -11,7 +11,7 @@ public class MenuGUI extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     
-    private JButton btnTickets, btnClientes, btnTicketAdd, btnEditarTicket, btnEliminarTicket, btnSalir;
+    private JButton btnTickets, btnClientes, btnTicketAdd, btnEditarTicket, btnEliminarTicket, btnSalir, btnBuscarTicket;
     
     private AppListener listener;
     
@@ -27,7 +27,7 @@ public class MenuGUI extends JFrame implements ActionListener {
                 }
             }
         });
-        setBounds(100, 100, 350, 400);
+        setBounds(100, 100, 450, 500);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -81,17 +81,27 @@ public class MenuGUI extends JFrame implements ActionListener {
         contentPane.add(lblEliminarTicket);
         
         btnEliminarTicket = new JButton("Eliminar Ticket");
-        btnEliminarTicket.setBounds(200, 250, 110, 25);
+        btnEliminarTicket.setBounds(200, 250, 140, 25);
         btnEliminarTicket.addActionListener(this);
         contentPane.add(btnEliminarTicket);
+        
+        // Buscar un Ticket
+        JLabel lblBuscar = new JLabel("Buscar un Ticket");
+        lblBuscar.setBounds(30, 290, 170, 23);
+        contentPane.add(lblBuscar);
+
+        btnBuscarTicket = new JButton("Buscar Ticket");
+        btnBuscarTicket.setBounds(200, 290, 140, 25);
+        btnBuscarTicket.addActionListener(this);
+        contentPane.add(btnBuscarTicket);
 
         // Salir del Programa
         JLabel lblSalir = new JLabel("Salir del Programa");
-        lblSalir.setBounds(30, 290, 170, 23);
+        lblSalir.setBounds(30, 330, 170, 23);
         contentPane.add(lblSalir);
         
         btnSalir = new JButton("Salir");
-        btnSalir.setBounds(200, 290, 110, 25);
+        btnSalir.setBounds(200, 330, 110, 25);
         btnSalir.addActionListener(this);
         contentPane.add(btnSalir);
     }
@@ -105,6 +115,7 @@ public class MenuGUI extends JFrame implements ActionListener {
         if (e.getSource() == btnTicketAdd) {listener.AbrirAddTicket();}
         if (e.getSource() == btnEditarTicket) { listener.AbrirEditarTicket(); }
         if (e.getSource() == btnEliminarTicket) {listener.AbrirEliminarTicket(); }
+        if (e.getSource() == btnBuscarTicket) { listener.AbrirBuscarTicket(); }
         if (e.getSource() == btnSalir) {
             if (listener != null) {
                 listener.generarReporteYCerrar();

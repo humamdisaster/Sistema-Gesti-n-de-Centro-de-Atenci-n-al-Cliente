@@ -10,6 +10,7 @@ public interface AppListener {
 	void AbrirEliminarTicket();
 	void AbrirFiltrEstado();
 	void AbrirFiltTiempo();
+	void AbrirBuscarTicket();
 	
 	// Ventana Mostrar Clientes
 	void mostrarClientesGUI();
