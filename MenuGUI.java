@@ -115,14 +115,24 @@ public class MenuGUI extends JFrame implements ActionListener {
         btnEliminarCliente.setBounds(200, 370, 140, 25);
         btnEliminarCliente.addActionListener(this);
         contentPane.add(btnEliminarCliente);
+        
+        // Filtrar tickets por estado
+        JLabel lblFiltrarEstado = new JLabel("Filtrar tickets por estado");
+        lblFiltrarEstado.setBounds(30, 410, 170, 23);
+        contentPane.add(lblFiltrarEstado);
 
+        JButton btnFiltrarEstado = new JButton("Filtrar");
+        btnFiltrarEstado.setBounds(200, 410, 110, 25);
+        btnFiltrarEstado.addActionListener(e -> listener.AbrirFiltrarEstado());
+        contentPane.add(btnFiltrarEstado);
+		        
         // Salir del Programa
         JLabel lblSalir = new JLabel("Salir del Programa");
-        lblSalir.setBounds(30, 410, 170, 23);
+        lblSalir.setBounds(30, 450, 170, 23);
         contentPane.add(lblSalir);
         
         btnSalir = new JButton("Salir");
-        btnSalir.setBounds(200, 410, 110, 25);
+        btnSalir.setBounds(200, 450, 110, 25);
         btnSalir.addActionListener(this);
         contentPane.add(btnSalir);
     }

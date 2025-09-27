@@ -8,7 +8,7 @@ public interface AppListener {
 	void AbrirAddTicket();
 	void AbrirEditarTicket();
 	void AbrirEliminarTicket();
-	void AbrirFiltrEstado();
+	void AbrirFiltrarEstado();
 	void AbrirFiltTiempo();
 	void AbrirBuscarTicket();
 	void AbrirBuscarCliente();

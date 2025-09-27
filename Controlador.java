@@ -175,8 +175,9 @@ public class Controlador implements AppListener {
     }
     
     @Override
-    public void AbrirFiltrEstado() {
-    	// TODO Auto-generated method stub
+    public void AbrirFiltrarEstado() {
+        FiltrarEstadoGUI gui = new FiltrarEstadoGUI(sistema);
+        gui.setVisible(true);
     }
     
     @Override
