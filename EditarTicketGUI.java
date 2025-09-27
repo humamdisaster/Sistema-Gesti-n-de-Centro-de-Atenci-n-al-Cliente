@@ -146,6 +146,9 @@ public class EditarTicketGUI extends JFrame {
         
         try {
             // Validar descripción
+        	if (nuevaDesc.isEmpty()) {
+        	    throw new DescripcionLargaException("La descripción no puede estar vacía.");
+        	}
             if (nuevaDesc.length() > 50) {
                 throw new DescripcionLargaException("La descripción no puede superar los 50 caracteres.");
             }
