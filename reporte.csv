@@ -5,17 +5,20 @@ C01;Nombre;Correo;
 C02;Nombre;Correo;
 ;;;Se agregó ticket con ID: T02 y descripción: "T02"
 ;;;Se agregó ticket con ID: T03 y descripción: "T03"
-;;;Se agregó ticket con ID: T04 y descripción: "T04"
 
 C03;Nombre;Correo;
-;;;Se agregó ticket con ID: T05 y descripción: "T05"
+;;;Se agregó ticket con ID: T04 y descripción: "T04"
 
-C04;Nombre;Correo;Sin acciones registradas
+C04;Nombre;Correo;
+;;;Se agregó ticket con ID: T05 y descripción: "T05"
 
 C05;Nombre;Correo;
 ;;;Se agregó ticket con ID: T06 y descripción: "T06"
 
-C06;Nombre;Correo;Sin acciones registradas
-
 C07;Nombre;Correo;Sin acciones registradas
+
+C06;Nombre;Correo;
+;;;Se agregó ticket con ID: T07 y descripción: "test eliminación"
+;;;Se editó ticket T07 → nueva descripción: "test eliminación 2", estado: Resuelto, satisfacción: 4
+;;;Cliente eliminado del sistema
 

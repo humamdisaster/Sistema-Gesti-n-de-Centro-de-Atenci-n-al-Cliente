@@ -2,6 +2,6 @@ ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfacci
 C01,Nombre,Correo,T01,T01,Pendiente,0,0
 C02,Nombre,Correo,T02,T02,Pendiente,0,0
 C02,Nombre,Correo,T03,T03,Pendiente,0,0
-C02,Nombre,Correo,T04,T04,Pendiente,0,0
-C03,Nombre,Correo,T05,T05,Pendiente,0,0
+C03,Nombre,Correo,T04,T04,Pendiente,0,0
+C04,Nombre,Correo,T05,T05,Pendiente,0,0
 C05,Nombre,Correo,T06,T06,Pendiente,0,0

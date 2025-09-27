@@ -7,6 +7,7 @@ import java.io.*;
  */
 public class SistemaAtencion {
     private Map<String, Cliente> clientes = new TreeMap<>();
+    private Map<String, Cliente> clientesEliminados = new TreeMap<>();
     private int contadorClientes = 1;
     private int contadorTickets = 1;
     
@@ -162,8 +163,17 @@ public class SistemaAtencion {
      * @param idCliente identificador único del cliente
      */
     public void eliminarCliente(String idCliente) {
-        Cliente clienteEliminado = clientes.remove(idCliente);
+        Cliente clienteEliminado = clientes.get(idCliente);
         if (clienteEliminado != null) {
+            // Registrar la eliminación en su historial
+            clienteEliminado.getHistorial().add("Cliente eliminado del sistema");
+            
+            // Mover a mapa de eliminados
+            clientesEliminados.put(idCliente, clienteEliminado);
+            
+            // Remover del mapa principal
+            clientes.remove(idCliente);
+            
             System.out.println("Cliente eliminado: " + clienteEliminado.getNombre());
         } else {
             System.out.println("No se encontró un cliente con el ID: " + idCliente);
@@ -234,38 +244,40 @@ public class SistemaAtencion {
         }
     }
     
+    private void escribirClienteEnReporte(FileWriter writer, Cliente cliente) throws IOException {
+        writer.append(cliente.getId()).append(";")
+              .append(cliente.getNombre()).append(";")
+              .append(cliente.getEmail()).append(";");
+
+        if (cliente.getHistorial().isEmpty()) {
+            writer.append("Sin acciones registradas\n");
+        } else {
+            writer.append("\n"); // salto de línea para historial
+            for (String accion : cliente.getHistorial()) {
+                writer.append(";;;").append(accion).append("\n");
+            }
+        }
+        writer.append("\n"); // línea en blanco para separar clientes
+    }
+    
     public void generarReporte(String nombreArchivo) {
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
 
             // Encabezado
             writer.append("ID Cliente;Nombre;Correo;Acción\n");
-
-            // Recorrer todos los clientes
+            
+            // Recorre clientes activos
             for (Cliente cliente : clientes.values()) {
-                // Escribir datos del cliente en una primera fila
-                writer.append(cliente.getId()).append(";")
-                      .append(cliente.getNombre()).append(";")
-                      .append(cliente.getEmail()).append(";");
-
-                if (cliente.getHistorial().isEmpty()) {
-                    writer.append("Sin acciones registradas\n");
-                } else {
-                    writer.append("\n"); // salto de línea para empezar historial
-
-                    // Escribir cada acción en filas nuevas
-                    for (String accion : cliente.getHistorial()) {
-                        writer.append(";") // columna ID vacía
-                              .append(";") // columna Nombre vacía
-                              .append(";") // columna Correo vacía
-                              .append(accion).append("\n");
-                    }
-                }
-
-                writer.append("\n"); // línea en blanco para separar clientes
+                escribirClienteEnReporte(writer, cliente);
             }
-
+            
+            // Recorre clientes eliminados
+            for (Cliente cliente : clientesEliminados.values()) {
+                escribirClienteEnReporte(writer, cliente);
+            }
+        	
             System.out.println("Reporte generado en " + nombreArchivo);
-
+            
         } catch (IOException e) {
             System.err.println("Error al generar reporte: " + e.getMessage());
         }
