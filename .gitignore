@@ -22,3 +22,4 @@
 /VerTicketsGUI.class
 /EditarTicketGUI.class
 /EliminarTicketGUI.class
+*.csv
