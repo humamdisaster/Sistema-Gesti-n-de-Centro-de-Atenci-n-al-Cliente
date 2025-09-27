@@ -7,47 +7,32 @@ import java.io.*;
  * Contiene el menú principal y la interacción con el usuario mediante consola.
  */
 public class Main {
-
+	
     public static void main(String[] args) throws IOException {
         // Instancia del sistema que maneja los clientes y tickets
+        // El constructor de SistemaAtencion ya carga automáticamente desde clientes.csv
         SistemaAtencion sistema = new SistemaAtencion();
         Scanner sc = new Scanner(System.in);
         int opcion;
         
-        
-        // Inicialización ventanas interfaz grafica
+        // Inicialización ventanas interfaz gráfica
         AddTicketGUI menuTickets = new AddTicketGUI();
         MenuGUI menu = new MenuGUI();
         
-        // Lectura de datos desde archivo .csv
+        // Verificar que el archivo CSV existe (crearlo si no)
         File csvClientes = new File("clientes.csv");
-    	
-    	// Se verifica si el archivo clientes.csv existe o no, de no existir lo crear para guardar los de la sesion
-    	if (csvClientes.exists()) {
-    		// System.out.println("El archivo extiste :p");
-    		FileReader fileR = new FileReader(csvClientes);
-    		BufferedReader bufferR = new BufferedReader(fileR);
-    		// System.out.println("Esto deberia de imprimir los clientes:p");
-    		String linea;
-    		while((linea = bufferR.readLine()) != null) {
-    			String[] cadenas = linea.split(",");
-    			sistema.agregarCliente(cadenas[1], cadenas[2]);
-    			// nTicket se asignara por orden de llegada
-    			sistema.agregarTicket(cadenas[0], cadenas[3]);
-    			}
-    		bufferR.close();
-    	}
-    		
-    	else {
-			csvClientes.createNewFile();	
-    		System.out.println("El archivo no existe :c, pero fue creado");
-    		}
-    	
-    	Controlador c = new Controlador(menu, menuTickets, sistema);
+        if (!csvClientes.exists()) {
+            csvClientes.createNewFile();	
+            System.out.println("Archivo clientes.csv creado exitosamente.");
+        }
+        
+        // Inicializar controlador
+        Controlador c = new Controlador(menu, menuTickets, sistema);
         
         do {  
-        	menu.setVisible(true);
-        	menuTickets.leerClientes();
+            menu.setVisible(true);
+            menuTickets.leerClientes();
+            
             // Mostrar menú principal por consola
             System.out.println("\n--- MENU ---");
             System.out.println("1. Mostrar clientes");
@@ -63,24 +48,23 @@ public class Main {
             System.out.println("11. Buscar ticket por ID");
             System.out.println("0. Salir");
             System.out.print("Seleccione opción: ");
-
+            
             // Leer opción seleccionada
             opcion = sc.nextInt();
             sc.nextLine(); // limpiar buffer
-
+            
             switch (opcion) {
                 case 1:
                     // Mostrar lista de clientes registrados en el sistema
                     sistema.mostrarClientes();
                     break;
-
+                    
                 case 2:
                     // Mostrar todos los tickets asociados a todos los clientes
                     sistema.mostrarTickets();
                     break;
-
+                    
                 case 3:
-                	
                     // Agregar un nuevo ticket a un cliente
                     System.out.print("ID Cliente: ");
                     String idClienteNuevo = sc.nextLine();
@@ -88,7 +72,7 @@ public class Main {
                     String descripcionNueva = sc.nextLine();
                     sistema.agregarTicket(idClienteNuevo, descripcionNueva);
                     break;
-
+                    
                 case 4:
                     // Editar un ticket ya existente
                     System.out.print("ID Cliente: ");
@@ -107,7 +91,7 @@ public class Main {
                     sc.nextLine();
                     sistema.editarTicket(idClienteEditar, idTicketEditar, descripcionEditada, estadoEditado, tiempoEditado, satisfaccionEditada);
                     break;
-
+                    
                 case 5:
                     // Eliminar un ticket por su ID
                     System.out.print("ID Cliente: ");
@@ -116,14 +100,14 @@ public class Main {
                     String idTicketEliminar = sc.nextLine();
                     sistema.eliminarTicket(idClienteEliminar, idTicketEliminar);
                     break;
-
+                    
                 case 6:
                     // Filtrar tickets por estado (Pendiente o Resuelto)
                     System.out.print("Ingrese estado a filtrar (Pendiente, Resuelto): ");
                     String estadoFiltrado = sc.nextLine();
                     sistema.filtrarTicketsPorEstado(estadoFiltrado);
                     break;
-
+                    
                 case 7:
                     // Filtrar tickets según un tiempo de respuesta específico
                     System.out.print("Ingrese horas a filtrar: ");
@@ -131,7 +115,7 @@ public class Main {
                     sc.nextLine();
                     sistema.filtrarTicketsPorTiempo(limiteHoras);
                     break;
-                
+                    
                 case 8:
                     // Agregar cliente
                     System.out.print("Nombre del cliente: ");
@@ -140,14 +124,14 @@ public class Main {
                     String nuevoEmail = sc.nextLine();
                     sistema.agregarCliente(nuevoNombre, nuevoEmail);
                     break;
-
+                    
                 case 9:
                     // Eliminar cliente
                     System.out.print("ID Cliente: ");
                     String idEliminarCliente = sc.nextLine();
                     sistema.eliminarCliente(idEliminarCliente);
                     break;
-
+                    
                 case 10:
                     // Buscar cliente por ID o nombre
                     System.out.print("Ingrese ID o nombre de cliente: ");
@@ -159,7 +143,7 @@ public class Main {
                         System.out.println("Cliente no encontrado.");
                     }
                     break;
-
+                    
                 case 11:
                     // Buscar ticket por ID
                     System.out.print("Ingrese ID Ticket: ");
@@ -171,9 +155,11 @@ public class Main {
                         System.out.println("Ticket no encontrado.");
                     }
                     break;
-
+                    
                 case 0:
                     System.out.println("Generando reporte y saliendo del sistema...");
+                    // Guardar cambios actuales en el CSV antes de salir
+                    sistema.guardarCambios("clientes.csv");
                     sistema.generarReporte("reporte.csv");
                     break;
                     
@@ -181,7 +167,7 @@ public class Main {
                     System.out.println("Opción inválida, intente nuevamente.");
             }
         } while (opcion != 0);
-
+        
         // Cerrar scanner
         sc.close();
     }

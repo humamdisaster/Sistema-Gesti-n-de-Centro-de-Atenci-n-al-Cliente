@@ -87,7 +87,7 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		lblDesc.setBounds(23, 151, 125, 14);
 		contentPane.add(lblDesc);
 		
-		comboBox.addItem("Eliga un cliente");
+		comboBox.addItem("Elija un cliente");
 		//comboBox.addItem("Nuevo Cliente");
 		
 		comboBox.addActionListener(this);
@@ -97,10 +97,13 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	public void setListener(AppListener l) {this.listener = l;}
 	
 	public boolean inComboBox(String id) {
-		for (int i = 0 ; i < comboBox.getItemCount() ; i++) {
-			if (comboBox.getItemAt(i) == id) {return true;}
-		}
-		return false;
+	    if (id == null) return false;
+	    for (int i = 0; i < comboBox.getItemCount(); i++) {
+	        if (id.equals(comboBox.getItemAt(i))) {
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 	
 	public void agregarCombo(String n) {comboBox.addItem(n);}
@@ -116,17 +119,48 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == comboBox) {
-			if (comboBox.getSelectedItem() != "Elija un cliente") {comboBox.removeItem("Elija un cliente");}
-			if (comboBox.getSelectedItem() == "Nuevo Cliente") {
-				textName.setText("");
-				textMail.setText("");
-			}
-			listener.rellenarCliente((String) comboBox.getSelectedItem());
-		}
-		if (e.getSource() == btnAdd) {listener.NuevoTicket((String) comboBox.getSelectedItem(), "nTicket", textDesc.getText());}
-		if (e.getSource() == btnVolver) {
+	    if (e.getSource() == comboBox) {
+	        if ("Elija un cliente".equals(comboBox.getSelectedItem())) {
+	            comboBox.removeItem("Elija un cliente");
+	        }
+	        if ("Nuevo Cliente".equals(comboBox.getSelectedItem())) {
+	            textName.setText("");
+	            textMail.setText("");
+	        }
+	        listener.rellenarCliente((String) comboBox.getSelectedItem());
+	    }
+	    
+	    if (e.getSource() == btnAdd) {
+	        String clienteSeleccionado = (String) comboBox.getSelectedItem();
+	        
+	        // Validaciones
+	        if (clienteSeleccionado == null || clienteSeleccionado.equals("Elija un cliente") || 
+	            clienteSeleccionado.equals("Nuevo Cliente")) {
+	            javax.swing.JOptionPane.showMessageDialog(this, 
+	                "Por favor seleccione un cliente válido", "Error", 
+	                javax.swing.JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+	        
+	        String descripcion = textDesc.getText().trim();
+	        if (descripcion.isEmpty()) {
+	            javax.swing.JOptionPane.showMessageDialog(this, 
+	                "La descripción no puede estar vacía", "Error", 
+	                javax.swing.JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+	        
+	        // CORRECCIÓN CRÍTICA: Pasar null para que el sistema genere el ID automáticamente
+	        listener.NuevoTicket(clienteSeleccionado, null, descripcion);
+	        
+	        // Limpiar campos después de agregar
+	        textDesc.setText("");
+	        javax.swing.JOptionPane.showMessageDialog(this, 
+	            "Ticket agregado correctamente", "Éxito", 
+	            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+	    }
+	    
+	    if (e.getSource() == btnVolver) {
 	        this.setVisible(false);
 	        listener.AbrirMenuPrincipal();
 	    }

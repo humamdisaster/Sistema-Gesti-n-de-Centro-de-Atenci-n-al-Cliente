@@ -152,6 +152,7 @@ public class MenuGUI extends JFrame implements ActionListener {
         if (e.getSource() == btnSalir) {
             if (listener != null) {
                 listener.generarReporteYCerrar();
+                
             }
         }
     }

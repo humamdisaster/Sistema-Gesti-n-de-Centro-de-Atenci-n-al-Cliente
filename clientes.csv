@@ -1,7 +1,21 @@
 ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion
-C01,Nombre,Correo,T01,T01,Pendiente,0,0
-C02,Nombre,Correo,T02,T02,Pendiente,0,0
-C02,Nombre,Correo,T03,T03,Pendiente,0,0
-C03,Nombre,Correo,T04,T04,Pendiente,0,0
-C04,Nombre,Correo,T05,T05,Pendiente,0,0
-C05,Nombre,Correo,T06,T06,Pendiente,0,0
+C01,Ana Pérez,ana.perez@mail.com,T01,Problema con facturación,Pendiente,0,0
+C01,Ana Pérez,ana.perez@mail.com,T07,Consulta sobre productos,Resuelto,2,4
+C02,Luis Gómez,luis.gomez@mail.com,T02,No puedo iniciar sesión,Resuelto,1,5
+C02,Luis Gómez,luis.gomez@mail.com,T03,Consulta sobre contrato,Pendiente,0,0
+C03,Carla Díaz,carla.diaz@mail.com,T04,Falla en el sistema,Resuelto,4,4
+C04,Pedro Fernández,pedro.fernandez@mail.com,T05,Error en la aplicación,Pendiente,0,0
+C05,Sofía Martínez,sofia.martinez@mail.com,T06,Duda sobre pagos,Resuelto,3,5
+C06,Diego Torres,diego.torres@mail.com,T08,Problema de instalación,Pendiente,0,0
+C07,María López,maria.lopez@mail.com,T09,Falla en actualización,Resuelto,2,4
+C08,Ricardo Sánchez,ricardo.sanchez@mail.com,T10,No llega correo de confirmación,Pendiente,0,0
+C09,Valentina Rojas,valentina.rojas@mail.com,T11,Consulta de garantía,Resuelto,3,5
+C10,Jorge Medina,jorge.medina@mail.com,T12,Error al registrar ticket,Pendiente,0,0
+C11,Camila Fuentes,camila.fuentes@mail.com,T13,Duda sobre facturación,Resuelto,2,3
+C12,Andrés Paredes,andres.paredes@mail.com,T14,Problema con contraseña,Pendiente,0,0
+C13,Fernanda Silva,fernanda.silva@mail.com,T15,Consulta de producto,Resuelto,1,5
+C14,Nicolás Castillo,nicolas.castillo@mail.com,T16,Error en notificaciones,Pendiente,0,0
+C15,Isabel Vega,isabel.vega@mail.com,T17,No puedo descargar reporte,Resuelto,3,4
+C16,Ramón López,ramon.lopez@mail.com,T18,Consulta sobre suscripción,Pendiente,0,0
+C17,Patricia Moreno,patricia.moreno@mail.com,T19,Falla en el sistema,Resuelto,4,5
+C18,Daniela Castro,daniela.castro@mail.com,T20,Problema al pagar factura,Pendiente,0,0
