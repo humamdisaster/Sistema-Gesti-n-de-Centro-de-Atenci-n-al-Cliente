@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class EditarTicketGUI extends JFrame {
     private static final long serialVersionUID = 1L;
-
+    
     private JPanel contentPane;
     private JComboBox<String> comboClientes;
     private JComboBox<String> comboTickets;
@@ -14,75 +14,74 @@ public class EditarTicketGUI extends JFrame {
     private JButton btnGuardar, btnVolver;
     private AppListener listener;
     private Map<String, Cliente> clientes;
-
+    
     public EditarTicketGUI() {
         setTitle("Editar Ticket");
         setResizable(false);
-        setBounds(100, 100, 450, 400);
+        setBounds(100, 100, 450, 450); // ventana más alta
         contentPane = new JPanel();
         contentPane.setLayout(null);
         setContentPane(contentPane);
-
+        
         // Combo clientes
         comboClientes = new JComboBox<>();
         comboClientes.setBounds(30, 30, 150, 25);
         contentPane.add(comboClientes);
         comboClientes.addActionListener(e -> cargarTickets());
-
+        
         // Combo tickets
         comboTickets = new JComboBox<>();
         comboTickets.setBounds(200, 30, 200, 25);
         contentPane.add(comboTickets);
         comboTickets.addActionListener(e -> mostrarDatosTicket());
-
+        
         // Descripción
         JLabel lblDesc = new JLabel("Descripción:");
         lblDesc.setBounds(30, 80, 100, 25);
         contentPane.add(lblDesc);
-
+        
         txtDescripcion = new JTextArea();
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
-
         JScrollPane scrollDesc = new JScrollPane(txtDescripcion);
-        scrollDesc.setBounds(130, 80, 250, 80);
+        scrollDesc.setBounds(130, 80, 250, 100); // más alto para que no se solape
         contentPane.add(scrollDesc);
-
+        
         // Estado
         JLabel lblEstado = new JLabel("Estado:");
-        lblEstado.setBounds(30, 130, 100, 25);
+        lblEstado.setBounds(30, 200, 100, 25);
         contentPane.add(lblEstado);
-
+        
         comboEstado = new JComboBox<>(new String[]{"Pendiente", "Resuelto"});
-        comboEstado.setBounds(130, 130, 120, 25);
+        comboEstado.setBounds(130, 200, 120, 25);
         contentPane.add(comboEstado);
-
+        
         // Satisfacción
         JLabel lblSatisfaccion = new JLabel("Satisfacción:");
-        lblSatisfaccion.setBounds(30, 180, 100, 25);
+        lblSatisfaccion.setBounds(30, 240, 100, 25);
         contentPane.add(lblSatisfaccion);
-
+        
         comboSatisfaccion = new JComboBox<>(new Integer[]{1,2,3,4,5});
-        comboSatisfaccion.setBounds(130, 180, 60, 25);
+        comboSatisfaccion.setBounds(130, 240, 60, 25);
         contentPane.add(comboSatisfaccion);
         
-        //Horas de resolución
+        // Horas de resolución
         JLabel lblHoras = new JLabel("Tiempo de resolución (h):");
-        lblHoras.setBounds(30, 220, 160, 25);
+        lblHoras.setBounds(30, 280, 160, 25);
         contentPane.add(lblHoras);
-
+        
         txtHoras = new JTextField();
-        txtHoras.setBounds(200, 220, 60, 25);
+        txtHoras.setBounds(200, 280, 60, 25);
         contentPane.add(txtHoras);
-
+        
         // Botones
         btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(100, 280, 100, 30);
+        btnGuardar.setBounds(100, 340, 100, 30);
         contentPane.add(btnGuardar);
         btnGuardar.addActionListener(e -> guardarCambios());
-
+        
         btnVolver = new JButton("Atrás");
-        btnVolver.setBounds(220, 280, 100, 30);
+        btnVolver.setBounds(220, 340, 100, 30);
         contentPane.add(btnVolver);
         btnVolver.addActionListener(e -> {
             setVisible(false);

@@ -11,7 +11,8 @@ public class MenuGUI extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     
-    private JButton btnTickets, btnClientes, btnTicketAdd, btnEditarTicket, btnEliminarTicket, btnSalir, btnBuscarTicket, btnBuscarCliente;
+    private JButton btnTickets, btnClientes, btnTicketAdd, btnEditarTicket, btnEliminarTicket, 
+                    btnSalir, btnBuscarTicket, btnBuscarCliente, btnEliminarCliente;
     
     private AppListener listener;
     
@@ -27,7 +28,7 @@ public class MenuGUI extends JFrame implements ActionListener {
                 }
             }
         });
-        setBounds(100, 100, 450, 500);
+        setBounds(100, 100, 450, 550);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -105,13 +106,33 @@ public class MenuGUI extends JFrame implements ActionListener {
         btnBuscarCliente.addActionListener(this);
         contentPane.add(btnBuscarCliente);
 
+        // Eliminar un Cliente
+        JLabel lblEliminarCliente = new JLabel("Eliminar un Cliente");
+        lblEliminarCliente.setBounds(30, 370, 170, 23);
+        contentPane.add(lblEliminarCliente);
+
+        btnEliminarCliente = new JButton("Eliminar Cliente");
+        btnEliminarCliente.setBounds(200, 370, 140, 25);
+        btnEliminarCliente.addActionListener(this);
+        contentPane.add(btnEliminarCliente);
+        
+        // Filtrar tickets por estado
+        JLabel lblFiltrarEstado = new JLabel("Filtrar tickets por estado");
+        lblFiltrarEstado.setBounds(30, 410, 170, 23);
+        contentPane.add(lblFiltrarEstado);
+
+        JButton btnFiltrarEstado = new JButton("Filtrar");
+        btnFiltrarEstado.setBounds(200, 410, 110, 25);
+        btnFiltrarEstado.addActionListener(e -> listener.AbrirFiltrarEstado());
+        contentPane.add(btnFiltrarEstado);
+		        
         // Salir del Programa
         JLabel lblSalir = new JLabel("Salir del Programa");
-        lblSalir.setBounds(30, 370, 170, 23);
+        lblSalir.setBounds(30, 450, 170, 23);
         contentPane.add(lblSalir);
         
         btnSalir = new JButton("Salir");
-        btnSalir.setBounds(200, 370, 110, 25);
+        btnSalir.setBounds(200, 450, 110, 25);
         btnSalir.addActionListener(this);
         contentPane.add(btnSalir);
     }
@@ -127,6 +148,7 @@ public class MenuGUI extends JFrame implements ActionListener {
         if (e.getSource() == btnEliminarTicket) {listener.AbrirEliminarTicket(); }
         if (e.getSource() == btnBuscarTicket) { listener.AbrirBuscarTicket(); }
         if (e.getSource() == btnBuscarCliente) { listener.AbrirBuscarCliente(); }
+        if (e.getSource() == btnEliminarCliente) { listener.AbrirEliminarCliente(); }
         if (e.getSource() == btnSalir) {
             if (listener != null) {
                 listener.generarReporteYCerrar();

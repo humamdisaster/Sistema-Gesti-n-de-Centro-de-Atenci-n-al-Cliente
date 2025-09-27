@@ -29,4 +29,9 @@
 /BuscarTicketGUI$1.class
 /BuscarClienteGUI.class
 /BuscarClienteGUI$1.class
+<<<<<<< HEAD
+>>>>>>> branch 'main' of https://github.com/humamdisaster/Sistema-Gesti-n-de-Centro-de-Atenci-n-al-Cliente
+=======
+/EliminarClienteGUI.class
+/FiltrarEstadoGUI.class
 >>>>>>> branch 'main' of https://github.com/humamdisaster/Sistema-Gesti-n-de-Centro-de-Atenci-n-al-Cliente

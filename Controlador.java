@@ -11,6 +11,7 @@ public class Controlador implements AppListener {
     private EditarTicketGUI editarTicketGUI;
     private EliminarTicketGUI eliminarTicketGUI;
     private BuscarTicketGUI buscarTicketGUI;
+    private EliminarClienteGUI eliminarClienteGUI;
 
     // Sistema
     private SistemaAtencion sistema;
@@ -139,9 +140,45 @@ public class Controlador implements AppListener {
         gui.setVisible(true);
     }
     
+
+ // --- Eliminar Cliente ---
     @Override
-    public void AbrirFiltrEstado() {
-    	// TODO Auto-generated method stub
+    public void AbrirEliminarCliente() {
+        // Inicializar solo una vez
+        if (eliminarClienteGUI == null) {
+            eliminarClienteGUI = new EliminarClienteGUI();
+            eliminarClienteGUI.setListener(this);
+        }
+        
+        // Llenar combo con clientes activos
+        eliminarClienteGUI.setClientes(sistema.getClientes());
+        
+        // Mostrar ventana y ocultar menú principal
+        menuPrincipal.setVisible(false);
+        eliminarClienteGUI.setVisible(true);
+    }
+    
+    @Override
+    public void EliminarCliente(String idCliente) {
+        // Eliminar cliente del sistema (queda registrado en historial dentro de SistemaAtencion)
+        sistema.eliminarCliente(idCliente);
+        
+        // Mensaje de confirmación
+        JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente");
+        
+        // Actualizar combo en la ventana de eliminación
+        if (eliminarClienteGUI != null) {
+            eliminarClienteGUI.setClientes(sistema.getClientes());
+        }
+        
+        // Volver al menú principal
+        menuPrincipal.setVisible(true);
+    }
+    
+    @Override
+    public void AbrirFiltrarEstado() {
+        FiltrarEstadoGUI gui = new FiltrarEstadoGUI(sistema);
+        gui.setVisible(true);
     }
     
     @Override

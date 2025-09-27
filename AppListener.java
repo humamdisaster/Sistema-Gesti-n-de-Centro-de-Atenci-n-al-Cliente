@@ -8,10 +8,11 @@ public interface AppListener {
 	void AbrirAddTicket();
 	void AbrirEditarTicket();
 	void AbrirEliminarTicket();
-	void AbrirFiltrEstado();
+	void AbrirFiltrarEstado();
 	void AbrirFiltTiempo();
 	void AbrirBuscarTicket();
 	void AbrirBuscarCliente();
+	void AbrirEliminarCliente();
 	
 	// Ventana Mostrar Clientes
 	void mostrarClientesGUI();
@@ -29,6 +30,9 @@ public interface AppListener {
 	// Ventana Eliminar Ticket
 	void EliminarTicket(String idCliente, String idTicket);
 	void rellenarTicketsCliente(String idCliente);
+	
+	// Ventana Eliminar Cliente
+	void EliminarCliente(String idCliente);
 	
 	// Genera un reporte al salir del programa
 	void generarReporteYCerrar();
