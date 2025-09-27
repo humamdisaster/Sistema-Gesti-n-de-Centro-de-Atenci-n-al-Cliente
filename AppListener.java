@@ -21,7 +21,7 @@ public interface AppListener {
 	void rellenarCliente(String id);
 	
 	// Ventana Editar Ticket
-	void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion);
+	void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, int horasResolucion);
 	
 	// Ventana Eliminar Ticket
 	void EliminarTicket(String idCliente, String idTicket);

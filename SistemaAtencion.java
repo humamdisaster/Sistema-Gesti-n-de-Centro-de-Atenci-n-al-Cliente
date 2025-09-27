@@ -228,7 +228,7 @@ public class SistemaAtencion {
                             ticket.getSatisfaccion());
                 }
             }
-            System.out.println("Cabios guardados correctamente en " + nombreArchivo);
+            System.out.println("Cambios guardados correctamente en " + nombreArchivo);
         } catch (IOException e) {
             System.out.println("Error al generar el reporte: " + e.getMessage());
         }
