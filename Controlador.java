@@ -78,6 +78,7 @@ public class Controlador implements AppListener {
     @Override
     public void AbrirAddTicket() {
         menuPrincipal.setVisible(false);
+        menuTickets.resetGUI();
         menuTickets.setVisible(true);
     }
     
@@ -90,7 +91,7 @@ public class Controlador implements AppListener {
     
     @Override
     public void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, int horasResolucion) {
-        Ticket t = sistema.buscarTicket(idTicket);
+    	Ticket t = sistema.buscarTicket(idTicket);
         if (t != null) {
             t.setDescripcion(nuevaDescripcion);
             t.setEstado(nuevoEstado);
@@ -202,6 +203,13 @@ public class Controlador implements AppListener {
                 menuTickets.llenarCliente(cliente.getNombre(), cliente.getEmail());
             }
         }
+    }
+    
+    @Override
+    public String NuevoCliente(String nombre, String correo, boolean retornarId) {
+        // Llamar a la sobrecarga de SistemaAtencion
+        String id = sistema.agregarCliente(nombre, correo, retornarId); // usa la sobrecarga
+        return id;
     }
     
     @Override

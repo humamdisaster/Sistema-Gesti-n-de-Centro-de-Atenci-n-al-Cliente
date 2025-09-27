@@ -41,6 +41,23 @@ public class SistemaAtencion {
         System.out.println("Cliente agregado con ID: " + idCliente);
     }
     
+<<<<<<< HEAD
+=======
+ // Sobrecarga: retorna el ID
+    public String agregarCliente(String nombreCliente, String correoCliente, boolean retornarId) {
+        String idCliente = generarIdCliente();
+        Cliente nuevoCliente = new Cliente(idCliente, nombreCliente, correoCliente);
+        clientes.put(idCliente, nuevoCliente);
+        System.out.println("Cliente agregado con ID: " + idCliente);
+        return idCliente;
+    }
+    
+    /**
+     * Agrega un nuevo ticket a un cliente existente, con ID generado automáticamente.
+     * @param idCliente ID del cliente
+     * @param descripcionTicket descripción del ticket
+     */
+>>>>>>> be8281a21f915e1d9c0b330c965c941240fa59c7
     public void agregarTicket(String idCliente, String descripcionTicket) {
         Cliente cliente = clientes.get(idCliente);
         if (cliente != null) {

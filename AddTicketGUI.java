@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 
 public class AddTicketGUI extends JFrame implements ActionListener {
 
@@ -88,7 +90,11 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		contentPane.add(lblDesc);
 		
 		comboBox.addItem("Elija un cliente");
+<<<<<<< HEAD
 		//comboBox.addItem("Nuevo Cliente");
+=======
+		comboBox.addItem("Nuevo Cliente");
+>>>>>>> be8281a21f915e1d9c0b330c965c941240fa59c7
 		
 		comboBox.addActionListener(this);
 
@@ -117,8 +123,19 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		textMail.setText(mail);
 	}
 	
+	public void resetGUI() {
+		if (!inComboBox("Elija un cliente")) {
+	        comboBox.insertItemAt("Elija un cliente", 0);
+	    }
+		comboBox.setSelectedItem("Elija un cliente"); // opción por defecto
+        textName.setText("");
+        textMail.setText("");
+        textDesc.setText("");
+    }
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 	    if (e.getSource() == comboBox) {
 	        if ("Elija un cliente".equals(comboBox.getSelectedItem())) {
 	            comboBox.removeItem("Elija un cliente");
@@ -164,5 +181,64 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	        this.setVisible(false);
 	        listener.AbrirMenuPrincipal();
 	    }
+=======
+		// TODO Auto-generated method stub
+		if (e.getSource() == comboBox) {
+		    if (!"Elija un cliente".equals(comboBox.getSelectedItem())) {
+		        comboBox.removeItem("Elija un cliente");
+		    }
+		    
+		    if ("Nuevo Cliente".equals(comboBox.getSelectedItem())) {
+		        textName.setText("");
+		        textMail.setText("");
+		    } else {
+		        // Cliente existente → rellenar campos
+		        listener.rellenarCliente((String) comboBox.getSelectedItem());
+		    }
+		}
+		
+		if (e.getSource() == btnAdd) {
+		    String seleccionado = (String) comboBox.getSelectedItem();
+		    
+		    if ("Nuevo Cliente".equals(seleccionado)) {
+		        // Crear cliente y obtener ID
+		        String nuevoId = listener.NuevoCliente(textName.getText(), textMail.getText(), true);
+
+		        // Crear ticket con ID recién creado
+		        listener.NuevoTicket(nuevoId, "nTicket", textDesc.getText());
+		        
+		        // Mostrar ventana de confirmación
+		        JOptionPane.showMessageDialog(
+		            this,
+		            "Has agregado al cliente " + nuevoId + " un nuevo Ticket",
+		            "Cliente y Ticket agregado",
+		            JOptionPane.INFORMATION_MESSAGE
+		        );
+
+		        // Volver al menú principal
+		        this.setVisible(false);
+		        listener.AbrirMenuPrincipal();
+
+		    } else if (!"Elija un cliente".equals(seleccionado)) {
+		        // Cliente existente
+		        listener.NuevoTicket(seleccionado, "nTicket", textDesc.getText());
+		        
+		        JOptionPane.showMessageDialog(
+		                this,
+		                "Se ha agregado un nuevo ticket al cliente " + seleccionado,
+		                "Ticket agregado",
+		                JOptionPane.INFORMATION_MESSAGE
+		            );
+
+		            this.setVisible(false);
+		            listener.AbrirMenuPrincipal();
+		       }
+		}
+		
+		if (e.getSource() == btnVolver) {
+		    this.setVisible(false);
+		    listener.AbrirMenuPrincipal();
+		}
+>>>>>>> be8281a21f915e1d9c0b330c965c941240fa59c7
 	}
 }

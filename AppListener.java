@@ -20,6 +20,7 @@ public interface AppListener {
 	
 	// Ventana Agregar Tickets
 	void NuevoTicket(String idCliente, String idTicket, String desc);
+	String NuevoCliente(String nombre, String correo, boolean retornarId);
 	void llenarComboClientes();
 	void rellenarCliente(String id);
 	
