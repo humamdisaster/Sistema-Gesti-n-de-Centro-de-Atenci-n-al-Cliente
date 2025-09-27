@@ -87,7 +87,6 @@ public class BuscarTicketGUI extends JFrame {
                 sb.append("Cliente: ").append(cliente.getNombre())
                   .append(" (").append(cliente.getId()).append(")\n")
                   .append("Email: ").append(cliente.getEmail()).append("\n\n")
-                  .append("Ticket ID: ").append(t.getId()).append("\n")
                   .append("Descripción: ").append(t.getDescripcion()).append("\n")
                   .append("Estado: ").append(t.getEstado()).append("\n")
                   .append("Horas de resolución: ").append(t.getTiempoRespuesta()).append("\n")

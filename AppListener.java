@@ -11,6 +11,7 @@ public interface AppListener {
 	void AbrirFiltrEstado();
 	void AbrirFiltTiempo();
 	void AbrirBuscarTicket();
+	void AbrirBuscarCliente();
 	
 	// Ventana Mostrar Clientes
 	void mostrarClientesGUI();

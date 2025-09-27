@@ -131,6 +131,14 @@ public class Controlador implements AppListener {
     }
     
     @Override
+    public void AbrirBuscarCliente() {
+        BuscarClienteGUI gui = new BuscarClienteGUI();
+        gui.setListener(this);
+        gui.setClientes(sistema.getClientes());
+        gui.setVisible(true);
+    }
+    
+    @Override
     public void AbrirFiltrEstado() {
     	// TODO Auto-generated method stub
     }

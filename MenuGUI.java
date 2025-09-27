@@ -11,7 +11,7 @@ public class MenuGUI extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     
-    private JButton btnTickets, btnClientes, btnTicketAdd, btnEditarTicket, btnEliminarTicket, btnSalir, btnBuscarTicket;
+    private JButton btnTickets, btnClientes, btnTicketAdd, btnEditarTicket, btnEliminarTicket, btnSalir, btnBuscarTicket, btnBuscarCliente;
     
     private AppListener listener;
     
@@ -94,14 +94,24 @@ public class MenuGUI extends JFrame implements ActionListener {
         btnBuscarTicket.setBounds(200, 290, 140, 25);
         btnBuscarTicket.addActionListener(this);
         contentPane.add(btnBuscarTicket);
+        
+        // Buscar un Cliente
+        JLabel lblBuscarCliente = new JLabel("Buscar un Cliente");
+        lblBuscarCliente.setBounds(30, 330, 170, 23);
+        contentPane.add(lblBuscarCliente);
+
+        btnBuscarCliente = new JButton("Buscar Cliente");
+        btnBuscarCliente.setBounds(200, 330, 140, 25);
+        btnBuscarCliente.addActionListener(this);
+        contentPane.add(btnBuscarCliente);
 
         // Salir del Programa
         JLabel lblSalir = new JLabel("Salir del Programa");
-        lblSalir.setBounds(30, 330, 170, 23);
+        lblSalir.setBounds(30, 370, 170, 23);
         contentPane.add(lblSalir);
         
         btnSalir = new JButton("Salir");
-        btnSalir.setBounds(200, 330, 110, 25);
+        btnSalir.setBounds(200, 370, 110, 25);
         btnSalir.addActionListener(this);
         contentPane.add(btnSalir);
     }
@@ -116,6 +126,7 @@ public class MenuGUI extends JFrame implements ActionListener {
         if (e.getSource() == btnEditarTicket) { listener.AbrirEditarTicket(); }
         if (e.getSource() == btnEliminarTicket) {listener.AbrirEliminarTicket(); }
         if (e.getSource() == btnBuscarTicket) { listener.AbrirBuscarTicket(); }
+        if (e.getSource() == btnBuscarCliente) { listener.AbrirBuscarCliente(); }
         if (e.getSource() == btnSalir) {
             if (listener != null) {
                 listener.generarReporteYCerrar();
