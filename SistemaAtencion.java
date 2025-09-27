@@ -102,6 +102,16 @@ public class SistemaAtencion {
         }
     }
     
+    public boolean correoYaExiste(String correo) {
+        if (correo == null || correo.isEmpty()) return false; // o lanzar excepción según diseño
+        for (Cliente c : clientes.values()) {
+            if (correo.equalsIgnoreCase(c.getEmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     // --- Editar y eliminar ---
     public void editarTicket(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, double nuevoTiempo, int nuevaSatisfaccion) {
         Cliente cliente = clientes.get(idCliente);

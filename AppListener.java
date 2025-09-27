@@ -23,6 +23,7 @@ public interface AppListener {
 	String NuevoCliente(String nombre, String correo, boolean retornarId);
 	void llenarComboClientes();
 	void rellenarCliente(String id);
+	boolean correoYaExiste(String correo);
 	
 	// Ventana Editar Ticket
 	void editarTicketGUI(String idCliente, String idTicket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion, double horasResolucion);
