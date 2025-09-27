@@ -3,16 +3,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+/**
+ * La clase {@code BuscarTicketGUI} representa la ventana gráfica
+ * para buscar y visualizar información de tickets dentro del sistema.
+ * 
+ * <p>Permite seleccionar un ticket de un comboBox y mostrar sus datos,
+ * incluyendo cliente asociado, descripción, estado, tiempo de resolución
+ * y nivel de satisfacción.</p>
+ * 
+ * <p>La clase utiliza un {@link AppListener} para interactuar con la
+ * lógica de negocio y la navegación hacia el menú principal.</p>
+ */
 public class BuscarTicketGUI extends JFrame {
     private static final long serialVersionUID = 1L;
     
+    /** Panel principal de la ventana. */
     private JPanel contentPane;
+    
+    /** ComboBox para seleccionar tickets disponibles. */
     private JComboBox<String> comboTickets;
+    
+    /** Área de texto donde se muestra la información del ticket seleccionado. */
     private JTextArea areaInfo;
+    
+    /** Botón para volver al menú principal. */
     private JButton btnVolver;
+    
+    /** Listener para manejar eventos de la aplicación y comunicarse con la lógica del programa. */
     private AppListener listener;
+    
+    /** Mapa de clientes cargados en la interfaz, utilizado para buscar tickets por cliente. */
     private Map<String, Cliente> clientes;
     
+    /**
+     * Constructor de la ventana {@code BuscarTicketGUI}.
+     * Inicializa la interfaz y sus componentes gráficos.
+     */
     public BuscarTicketGUI() {
         setTitle("Buscar Ticket");
         setResizable(false);
@@ -53,10 +79,22 @@ public class BuscarTicketGUI extends JFrame {
         });
     }
     
+    /**
+     * Asigna el listener que manejará los eventos de la aplicación.
+     * 
+     * @param l instancia de {@link AppListener} para manejar eventos y lógica de negocio
+     */
     public void setListener(AppListener l) {
         this.listener = l;
     }
     
+    /**
+     * Carga el mapa de clientes en la interfaz y llena el comboBox con todos los tickets.
+     * 
+     * <p>Selecciona automáticamente el primer ticket disponible y muestra su información.</p>
+     * 
+     * @param clientes mapa de clientes, cada uno con sus tickets asociados
+     */
     public void setClientes(Map<String, Cliente> clientes) {
         this.clientes = clientes;
         comboTickets.removeAllItems();
@@ -73,6 +111,12 @@ public class BuscarTicketGUI extends JFrame {
         }
     }
     
+    /**
+     * Muestra la información del ticket seleccionado en el área de texto.
+     * 
+     * <p>Incluye el cliente asociado, correo del cliente, descripción del ticket,
+     * estado, horas de resolución y satisfacción.</p>
+     */
     private void mostrarInfoTicket() {
         String seleccionado = (String) comboTickets.getSelectedItem();
         if (seleccionado == null) return;

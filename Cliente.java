@@ -32,9 +32,7 @@ public class Cliente extends Persona {
                       " y descripción: \"" + ticket.getDescripcion() + "\"");
     }
 
-    /**
-     * Registra una edición en el historial.
-     */
+    /** Registra una edición en el historial. */
     public void registrarEdicion(Ticket ticket, String nuevaDescripcion, String nuevoEstado, int nuevaSatisfaccion) {
         historial.add("Se editó ticket " + ticket.getId() +
                       " → nueva descripción: \"" + nuevaDescripcion + "\", estado: " + nuevoEstado +
@@ -84,11 +82,26 @@ public class Cliente extends Persona {
         return historial;
     }
 
+    /**
+     * Devuelve información básica del cliente.
+     * 
+     * <p>Este método sobrescribe un posible método {@code info()} de una clase padre
+     * o interfaz.</p>
+     *
+     * @return una cadena con el nombre, ID y correo del cliente
+     */
     @Override
     public String info() {
         return "Cliente: " + nombre + " [ID: " + id + ", Email: " + email + "]";
     }
 
+    /**
+     * Devuelve información del cliente, en versión básica o detallada.
+     *
+     * @param detallado si es {@code true}, devuelve información detallada (ID, nombre y correo);
+     *                  si es {@code false}, devuelve información básica
+     * @return una cadena con los datos del cliente según el nivel de detalle
+     */
     public String info(boolean detallado) {
         if (detallado) {
             return "ID: " + id + " Nombre: " + nombre + " Email: " + email;

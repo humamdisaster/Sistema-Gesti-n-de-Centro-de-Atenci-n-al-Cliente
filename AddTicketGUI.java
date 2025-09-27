@@ -12,24 +12,53 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-
+/**
+ * La clase {@code AddTicketGUI} representa la ventana gráfica 
+ * para la creación de un nuevo ticket dentro del sistema de gestión.
+ * 
+ * <p>Permite al usuario seleccionar un cliente existente o agregar
+ * un nuevo cliente, ingresar nombre, correo electrónico y una 
+ * descripción para el ticket. Además, incluye botones para regresar
+ * al menú anterior o confirmar la creación del ticket.</p>
+ * 
+ * <p>Implementa la interfaz {@link ActionListener} para manejar
+ * las acciones de los botones y el comboBox.</p>
+ */
 public class AddTicketGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	
+	/** Panel principal de la interfaz. */
 	private JPanel contentPane;
 
+	/** Lista desplegable para seleccionar cliente o crear uno nuevo. */
 	private JComboBox<String> comboBox;
+	
+	/** Campo de texto para ingresar el nombre del cliente. */
 	private JTextField textName;
+	
+	/** Campo de texto para ingresar el correo del cliente. */
 	private JTextField textMail;
+	
+	/** Botón para volver al menú anterior. */
 	private JButton btnVolver;
+	
+	/** Botón para agregar un nuevo ticket. */
 	private JButton btnAdd;
+	
+	/** Área de texto para ingresar la descripción del ticket. */
 	private JTextArea textDesc;
 	
+	/** Referencia al listener de la aplicación para comunicación externa. */
 	private AppListener listener;
 	
 	/**
-	 * Create the frame.
-	 */
+     * Constructor de la ventana {@code AddTicketGUI}.
+     * 
+     * <p>Inicializa la interfaz con los componentes necesarios para 
+     * crear un nuevo ticket: selección de cliente, ingreso de nombre, 
+     * correo y descripción.</p>
+     */
 	public AddTicketGUI() {	
 		setTitle("Sistema Gestión de Tickets");
 		setResizable(false);
@@ -97,8 +126,20 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 
 	}
 	
+	/**
+     * Asigna el {@link AppListener} que recibirá los eventos de esta vista.
+     * 
+     * @param l el listener de la aplicación
+     */
 	public void setListener(AppListener l) {this.listener = l;}
 	
+	/**
+     * Verifica si un identificador de cliente ya existe en el comboBox.
+     *
+     * @param id identificador de cliente a buscar
+     * @return {@code true} si el identificador está en la lista, 
+     *         {@code false} en caso contrario
+     */
 	public boolean inComboBox(String id) {
 	    if (id == null) return false;
 	    for (int i = 0; i < comboBox.getItemCount(); i++) {
@@ -109,17 +150,39 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	    return false;
 	}
 	
+	/**
+	 * Agrega un nuevo elemento al comboBox de clientes.
+	 *
+	 * @param n el nombre o identificador del cliente a agregar
+	 */
 	public void agregarCombo(String n) {comboBox.addItem(n);}
 	
+	/**
+	 * Solicita al listener que lea los clientes existentes
+	 * y los agregue al comboBox.
+	 */
 	public void leerClientes() {
 		listener.llenarComboClientes();
 	}
 	
+	/**
+	 * Llena los campos de nombre y correo con los datos de un cliente existente.
+	 *
+	 * @param name nombre del cliente
+	 * @param mail correo electrónico del cliente
+	 */
 	public void llenarCliente(String name, String mail) {
 		textName.setText(name);
 		textMail.setText(mail);
 	}
 	
+	/**
+	 * Restablece la interfaz a su estado inicial:
+	 * <ul>
+	 *   <li>Selecciona "Elija un cliente" en el comboBox.</li>
+	 *   <li>Limpia los campos de nombre, correo y descripción.</li>
+	 * </ul>
+	 */
 	public void resetGUI() {
 		if (!inComboBox("Elija un cliente")) {
 	        comboBox.insertItemAt("Elija un cliente", 0);
@@ -130,6 +193,25 @@ public class AddTicketGUI extends JFrame implements ActionListener {
         textDesc.setText("");
     }
 	
+	/**
+	 * Maneja los eventos de acción generados por los botones y el comboBox.
+	 * 
+	 * <p>Dependiendo del componente que genere el evento, realiza diferentes acciones:</p>
+	 * <ul>
+	 *   <li>comboBox: limpia los campos si es "Nuevo Cliente" o rellena con datos existentes.</li>
+	 *   <li>btnAdd: valida los campos, lanza excepciones si hay errores y crea tickets o clientes según corresponda.</li>
+	 *   <li>btnVolver: cierra la ventana actual y abre el menú principal.</li>
+	 * </ul>
+	 *
+	 * <p>Excepciones manejadas dentro del método:</p>
+	 * <ul>
+	 *   <li>{@link DescripcionLargaException} si la descripción está vacía o supera 50 caracteres.</li>
+	 *   <li>{@link CorreoInvalidoException} si el correo está vacío o ya existe.</li>
+	 *   <li>{@link NombreInvalidoException} si el nombre está vacío.</li>
+	 * </ul>
+	 *
+	 * @param e evento de acción generado por un componente de la interfaz
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -1,20 +1,56 @@
 import javax.swing.*;
 import java.util.Map;
 
+/**
+ * La clase {@code EditarTicketGUI} representa la ventana gráfica
+ * para editar tickets existentes dentro del sistema.
+ * 
+ * <p>Permite seleccionar un cliente y luego un ticket asociado, 
+ * mostrando su descripción, estado, nivel de satisfacción y tiempo de resolución. 
+ * El usuario puede modificar estos datos y guardarlos.</p>
+ * 
+ * <p>La clase utiliza un {@link AppListener} para interactuar con la
+ * lógica de negocio y la navegación hacia el menú principal.</p>
+ */
 public class EditarTicketGUI extends JFrame {
     private static final long serialVersionUID = 1L;
     
+    /** Panel principal de la ventana. */
     private JPanel contentPane;
+    
+    /** ComboBox para seleccionar un cliente. */
     private JComboBox<String> comboClientes;
+    
+    /** ComboBox para seleccionar un ticket del cliente. */
     private JComboBox<String> comboTickets;
+    
+    /** Área de texto para la descripción del ticket. */
     private JTextArea txtDescripcion;
+    
+    /** ComboBox para el estado del ticket ("Pendiente" o "Resuelto"). */
     private JComboBox<String> comboEstado;
+    
+    /** ComboBox para la satisfacción del ticket (1 a 5). */
     private JComboBox<Integer> comboSatisfaccion;
+    
+    /** Campo de texto para las horas de resolución del ticket. */
     private JTextField txtHoras;
+    
+    /** Botón para guardar cambios en el ticket y 
+     * botón para volver al menú principal. 
+     */
     private JButton btnGuardar, btnVolver;
+    
+    /** Listener para manejar eventos de la aplicación y comunicarse con la lógica de negocio. */
     private AppListener listener;
+    
+    /** Mapa de clientes cargados en la interfaz, utilizado para seleccionar tickets. */
     private Map<String, Cliente> clientes;
     
+    /**
+     * Constructor de la ventana {@code EditarTicketGUI}.
+     * Inicializa la interfaz y sus componentes gráficos.
+     */
     public EditarTicketGUI() {
         setTitle("Editar Ticket");
         setResizable(false);
@@ -89,8 +125,18 @@ public class EditarTicketGUI extends JFrame {
         });
     }
 
+    /**
+     * Asigna el listener que manejará los eventos de la aplicación.
+     * 
+     * @param l instancia de {@link AppListener} para manejar eventos y lógica de negocio
+     */
     public void setListener(AppListener l) { this.listener = l; }
 
+    /**
+     * Carga el mapa de clientes en la interfaz y llena el comboBox de clientes.
+     * 
+     * @param clientes mapa de clientes, cada uno con sus tickets asociados
+     */
     public void setClientes(Map<String, Cliente> clientes) {
         this.clientes = clientes;
         comboClientes.removeAllItems();
@@ -100,6 +146,10 @@ public class EditarTicketGUI extends JFrame {
         cargarTickets();
     }
 
+    /**
+     * Carga los tickets del cliente seleccionado en el comboBox de tickets.
+     * Selecciona automáticamente el primer ticket y muestra sus datos.
+     */
     private void cargarTickets() {
         comboTickets.removeAllItems();
         String clienteSeleccionado = (String) comboClientes.getSelectedItem();
@@ -114,6 +164,10 @@ public class EditarTicketGUI extends JFrame {
         mostrarDatosTicket();
     }
 
+    /**
+     * Muestra los datos del ticket seleccionado en los campos correspondientes
+     * (descripción, estado, satisfacción y horas de resolución).
+     */
     private void mostrarDatosTicket() {
         String clienteSeleccionado = (String) comboClientes.getSelectedItem();
         String ticketSeleccionado = (String) comboTickets.getSelectedItem();
@@ -132,6 +186,14 @@ public class EditarTicketGUI extends JFrame {
         }
     }
     
+    /**
+     * Guarda los cambios realizados en el ticket seleccionado.
+     * 
+     * <p>Valida que la descripción no esté vacía ni exceda 50 caracteres
+     * y que las horas de resolución sean un número no negativo.</p>
+     * 
+     * <p>Si la validación falla, muestra un mensaje de error.</p>
+     */
     private void guardarCambios() {
         String clienteSeleccionado = (String) comboClientes.getSelectedItem();
         String ticketSeleccionado = (String) comboTickets.getSelectedItem();

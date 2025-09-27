@@ -1,16 +1,44 @@
 import javax.swing.*;
 import java.util.Map;
 
+/**
+ * La clase {@code EliminarClienteGUI} representa la ventana gráfica
+ * para eliminar un cliente dentro del sistema.
+ * 
+ * <p>Permite seleccionar un cliente de un comboBox y eliminarlo de manera
+ * irreversible. Muestra un aviso de precaución al usuario antes de confirmar
+ * la eliminación.</p>
+ * 
+ * <p>La clase utiliza un {@link AppListener} para interactuar con la
+ * lógica de negocio y la navegación hacia el menú principal.</p>
+ */
 public class EliminarClienteGUI extends JFrame {
     private static final long serialVersionUID = 1L;
 
+    /** Panel principal de la ventana. */
     private JPanel contentPane;
+    
+    /** ComboBox para seleccionar el cliente a eliminar. */
     private JComboBox<String> comboClientes;
+    
+    /** Botón para eliminar al cliente seleccionado y 
+     * botón para volver al menú principal. 
+     */
     private JButton btnEliminar, btnVolver;
+    
+    /** Área de texto con aviso de precaución sobre la acción irreversible. */
     private JTextArea areaAviso;
+    
+    /** Listener para manejar eventos de la aplicación y comunicarse con la lógica del programa. */
     private AppListener listener;
+    
+    /** Mapa de clientes cargados en la interfaz. */
     private Map<String, Cliente> clientes;
 
+    /**
+     * Constructor de la ventana {@code EliminarClienteGUI}.
+     * Inicializa la interfaz y sus componentes gráficos.
+     */
     public EliminarClienteGUI() {
         setTitle("Eliminar Cliente");
         setResizable(false);
@@ -65,8 +93,18 @@ public class EliminarClienteGUI extends JFrame {
         });
     }
 
+    /**
+     * Asigna el listener que manejará los eventos de la aplicación.
+     * 
+     * @param l instancia de {@link AppListener} para manejar eventos y lógica de negocio
+     */
     public void setListener(AppListener l) { this.listener = l; }
 
+    /**
+     * Carga el mapa de clientes en la interfaz y llena el comboBox.
+     * 
+     * @param clientes mapa de clientes disponibles
+     */
     public void setClientes(Map<String, Cliente> clientes) {
         this.clientes = clientes;
         comboClientes.removeAllItems();
