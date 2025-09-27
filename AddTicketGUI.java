@@ -90,11 +90,8 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		contentPane.add(lblDesc);
 		
 		comboBox.addItem("Elija un cliente");
-<<<<<<< HEAD
-		//comboBox.addItem("Nuevo Cliente");
-=======
+		
 		comboBox.addItem("Nuevo Cliente");
->>>>>>> be8281a21f915e1d9c0b330c965c941240fa59c7
 		
 		comboBox.addActionListener(this);
 
@@ -135,53 +132,6 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-	    if (e.getSource() == comboBox) {
-	        if ("Elija un cliente".equals(comboBox.getSelectedItem())) {
-	            comboBox.removeItem("Elija un cliente");
-	        }
-	        if ("Nuevo Cliente".equals(comboBox.getSelectedItem())) {
-	            textName.setText("");
-	            textMail.setText("");
-	        }
-	        listener.rellenarCliente((String) comboBox.getSelectedItem());
-	    }
-	    
-	    if (e.getSource() == btnAdd) {
-	        String clienteSeleccionado = (String) comboBox.getSelectedItem();
-	        
-	        // Validaciones
-	        if (clienteSeleccionado == null || clienteSeleccionado.equals("Elija un cliente") || 
-	            clienteSeleccionado.equals("Nuevo Cliente")) {
-	            javax.swing.JOptionPane.showMessageDialog(this, 
-	                "Por favor seleccione un cliente válido", "Error", 
-	                javax.swing.JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
-	        String descripcion = textDesc.getText().trim();
-	        if (descripcion.isEmpty()) {
-	            javax.swing.JOptionPane.showMessageDialog(this, 
-	                "La descripción no puede estar vacía", "Error", 
-	                javax.swing.JOptionPane.ERROR_MESSAGE);
-	            return;
-	        }
-	        
-	        // CORRECCIÓN CRÍTICA: Pasar null para que el sistema genere el ID automáticamente
-	        listener.NuevoTicket(clienteSeleccionado, null, descripcion);
-	        
-	        // Limpiar campos después de agregar
-	        textDesc.setText("");
-	        javax.swing.JOptionPane.showMessageDialog(this, 
-	            "Ticket agregado correctamente", "Éxito", 
-	            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-	    }
-	    
-	    if (e.getSource() == btnVolver) {
-	        this.setVisible(false);
-	        listener.AbrirMenuPrincipal();
-	    }
-=======
 		// TODO Auto-generated method stub
 		if (e.getSource() == comboBox) {
 		    if (!"Elija un cliente".equals(comboBox.getSelectedItem())) {
@@ -239,6 +189,5 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		    this.setVisible(false);
 		    listener.AbrirMenuPrincipal();
 		}
->>>>>>> be8281a21f915e1d9c0b330c965c941240fa59c7
 	}
 }

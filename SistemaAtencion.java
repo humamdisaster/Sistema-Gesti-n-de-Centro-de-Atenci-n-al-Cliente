@@ -41,9 +41,7 @@ public class SistemaAtencion {
         System.out.println("Cliente agregado con ID: " + idCliente);
     }
     
-<<<<<<< HEAD
-=======
- // Sobrecarga: retorna el ID
+    // Sobrecarga: retorna el ID
     public String agregarCliente(String nombreCliente, String correoCliente, boolean retornarId) {
         String idCliente = generarIdCliente();
         Cliente nuevoCliente = new Cliente(idCliente, nombreCliente, correoCliente);
@@ -57,7 +55,6 @@ public class SistemaAtencion {
      * @param idCliente ID del cliente
      * @param descripcionTicket descripción del ticket
      */
->>>>>>> be8281a21f915e1d9c0b330c965c941240fa59c7
     public void agregarTicket(String idCliente, String descripcionTicket) {
         Cliente cliente = clientes.get(idCliente);
         if (cliente != null) {
@@ -204,7 +201,7 @@ public class SistemaAtencion {
     
     public void generarReporte(String nombreArchivo) {
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
-            writer.append("ID Cliente;Nombre;Correo;Acción\n");
+            writer.append("ID Cliente;Nombre;Correo;Tiempo Resolución (h);Acción\n");
             for (Cliente cliente : clientes.values()) escribirClienteEnReporte(writer, cliente);
             for (Cliente cliente : clientesEliminados.values()) escribirClienteEnReporte(writer, cliente);
             System.out.println("Reporte generado en " + nombreArchivo);
@@ -221,7 +218,15 @@ public class SistemaAtencion {
         else {
             writer.append("\n");
             for (String accion : cliente.getHistorial()) {
-                writer.append(";;;").append(accion).append("\n");
+                // Buscar si la acción menciona un ticket para agregar su tiempo
+                String accionConTiempo = accion;
+                for (Ticket ticket : cliente.getTickets()) {
+                    if (accion.contains(ticket.getId())) {
+                        accionConTiempo = accion + ", Tiempo de respuesta: " + ticket.getTiempoRespuesta() + " (h)";
+                        break;
+                    }
+                }
+                writer.append(";;;0;").append(accionConTiempo).append("\n");
             }
         }
         writer.append("\n");
