@@ -246,9 +246,7 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 		        if (correo.isEmpty()) {
 		        	throw new CorreoInvalidoException("El correo no puede estar vacío");
 		        }
-		        if (listener.correoYaExiste(textMail.getText())) {
-		        	throw new CorreoInvalidoException("El correo ya está registrado");
-		        }
+		        
 		        if (nombre.isEmpty()) {
 		        	throw new NombreInvalidoException("El nombre no puede estar vacío");
 		        }
@@ -256,6 +254,9 @@ public class AddTicketGUI extends JFrame implements ActionListener {
 
 		        if ("Nuevo Cliente".equals(seleccionado)) {
 		            // Crear cliente y obtener ID
+		        	if (listener.correoYaExiste(textMail.getText())) {
+		        		throw new CorreoInvalidoException("El correo ya está registrado");
+		        	}
 		            String nuevoId = listener.NuevoCliente(textName.getText(), textMail.getText(), true);
 		            // Crear ticket con ID recién creado
 		            listener.NuevoTicket(nuevoId, "nTicket", descripcion);
