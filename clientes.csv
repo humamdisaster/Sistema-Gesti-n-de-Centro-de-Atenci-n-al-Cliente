@@ -1,5 +1,5 @@
 ID_Cliente,Nombre,Correo,ID_Ticket,Descripcion,Estado,TiempoRespuesta,Satisfaccion
-C01,Ana Pérez,ana.perez@mail.com,T01,Problema con facturación,Resuelto,2,00,0
+C01,Ana Pérez,ana.perez@mail.com,T01,Ya no hay problema,Resuelto,2,00,5
 C01,Ana Pérez,ana.perez@mail.com,T07,Consulta sobre productos,Resuelto,2,00,0
 C02,Luis Gómez,luis.gomez@mail.com,T02,No puedo iniciar sesión,Resuelto,1,00,0
 C02,Luis Gómez,luis.gomez@mail.com,T03,Consulta sobre contrato,Pendiente,0,00,0
@@ -20,4 +20,3 @@ C16,Ramón López,ramon.lopez@mail.com,T18,Consulta sobre suscripción,Pendiente
 C17,Patricia Moreno,patricia.moreno@mail.com,T19,Falla en el sistema,Resuelto,4,00,0
 C18,Daniela Castro,daniela.castro@mail.com,T20,Problema al pagar factura,Pendiente,0,00,0
 C19,Claudia Lucero,claudia@gmail.com,T21,No funciona el sistema.,Pendiente,0,00,0
-C20,Maria Lucero,maria@gmail.com,T22,No hay luz,Pendiente,0,00,0

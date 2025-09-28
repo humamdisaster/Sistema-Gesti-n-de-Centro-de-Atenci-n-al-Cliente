@@ -2,6 +2,7 @@ ID Cliente;Nombre;Correo;Tiempo Resolución (h);Acción
 C01;Ana Pérez;ana.perez@mail.com;
 ;;;0;Se agregó ticket con ID: T01 y descripción: "Problema con facturación", Tiempo de respuesta: 2.0 (h)
 ;;;0;Se agregó ticket con ID: T07 y descripción: "Consulta sobre productos", Tiempo de respuesta: 2.0 (h)
+;;;0;Se editó ticket T01 → nueva descripción: "Ya no hay problema", estado: Resuelto, satisfacción: 5, Tiempo de respuesta: 2.0 (h)
 
 C02;Luis Gómez;luis.gomez@mail.com;
 ;;;0;Se agregó ticket con ID: T02 y descripción: "No puedo iniciar sesión", Tiempo de respuesta: 1.0 (h)
@@ -59,5 +60,7 @@ C19;Claudia Lucero;claudia@gmail.com;
 ;;;0;Se agregó ticket con ID: T21 y descripción: "No funciona el sistema.", Tiempo de respuesta: 0.0 (h)
 
 C20;Maria Lucero;maria@gmail.com;
-;;;0;Se agregó ticket con ID: T22 y descripción: "No hay luz", Tiempo de respuesta: 0.0 (h)
+;;;0;Se agregó ticket con ID: T22 y descripción: "No hay luz"
+;;;0;Se eliminó ticket con ID: T22
+;;;0;Cliente eliminado del sistema
 
